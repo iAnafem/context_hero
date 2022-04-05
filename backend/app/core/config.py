@@ -4,7 +4,7 @@ from starlette.datastructures import Secret
 
 
 config = Config(".env")
-PROJECT_NAME = "fast_api_default_project"
+PROJECT_NAME = "context_hero"
 VERSION = "1.0.0"
 API_PREFIX = "/api"
 SECRET_KEY = config("SECRET_KEY", cast=Secret, default="DEFAULT_SECRET_KEY")

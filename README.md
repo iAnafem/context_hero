@@ -2,8 +2,8 @@
 
 #### Clone repository and go to project folder:
 
-git clone https://github.com/iAnafem/fast_api_default_project.git <br />
-cd fast_api_default_project
+git clone https://github.com/iAnafem/context_hero.git <br />
+cd context_hero
 
 #### Install necessary dependencies
 If you don't have docker, docker-compose, python3.10:

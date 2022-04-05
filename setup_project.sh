@@ -42,11 +42,11 @@ sed -i "s&db_server&$db_server&g" docker-compose.dev.yml
 sed -i "s&- db_server&- $db_server&g" docker-compose.dev.yml
 
 
-mv ../fast_api_default_project ../$project_name
+mv ../context_hero ../$project_name
 
-grep -rli 'fast_api_default_project' * | xargs -i@ sed -i "s/fast_api_default_project/$project_name/g" @
+grep -rli 'context_hero' * | xargs -i@ sed -i "s/context_hero/$project_name/g" @
 
-grep -rli 'react_default_app' * | xargs -i@ sed -i "s/react_default_app/$project_name/g" @
+grep -rli 'context_hero' * | xargs -i@ sed -i "s/context_hero/$project_name/g" @
 
 
 cd frontend
