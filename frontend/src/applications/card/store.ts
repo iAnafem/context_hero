@@ -1,23 +1,25 @@
 import { action, autorun, computed, makeObservable, observable } from "mobx";
 
-class TestStore {
-  backendMsgs: string[] = [];
-  dbMsgs: string[] = [];
+class CardStore {
+  prefix: string[] = ["This", "is", "my", "test", "message", "."];
+  suffix: string[] = ["-", "is", "the", "correct", "answer"];
+  correctAns: string = "ANSWER";
+  suggestedAns: string = "";
 
   constructor() {
     makeObservable(this, {
-      backendMsgs: observable,
-      dbMsgs: observable,
-      storeDetails: computed,
+      prefix: observable,
+      suffix: observable,
+      correctAns: observable,
+      suggestedAns: observable,
       fetch: action.bound,
-      setBackendMsg: action.bound,
-      setDbMsg: action.bound,
+      setSentenceData: action.bound,
     });
     autorun(this.logStoreDetails);
   }
 
   get storeDetails() {
-    return `We have ${this.backendMsgs.length} msgs from backend and ${this.dbMsgs.length} msgs from db, so far!!!`;
+    return `Correct answer is: ${this.correctAns} !`;
   }
 
   logStoreDetails = () => {
@@ -36,15 +38,13 @@ class TestStore {
       });
   }
 
-  setBackendMsg(msg: string) {
-    this.backendMsgs.push(msg);
-  }
-
-  setDbMsg(msg: string) {
-    this.dbMsgs.push(msg);
+  setSentenceData(data: any) {
+    this.prefix = data.prefix;
+    this.suffix = data.suffix;
+    this.correctAns = data.correctAns;
   }
 }
 
-const instance = new TestStore();
+const instance = new CardStore();
 
 export default instance;
