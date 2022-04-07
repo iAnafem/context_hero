@@ -1,7 +1,7 @@
 import { action, autorun, computed, makeObservable, observable } from "mobx";
 
 class CardStore {
-  prefix: string[] = ["This", "is", "my", "test", "message", "."];
+  prefix: string[] = ["This", "is", "my", "test", "message."];
   suffix: string[] = ["-", "is", "the", "correct", "answer"];
   correctAns: string = "ANSWER";
 

@@ -1,0 +1,21 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+  transition: 0.3s;
+  width: 30%;
+  border-radius: 10px;
+  margin: 50px auto auto;
+}
+
+.phrase {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.word {
+  padding: 4px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
