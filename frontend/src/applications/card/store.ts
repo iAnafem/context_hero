@@ -12,6 +12,7 @@ class CardStore {
       correctAns: observable,
       fetch: action.bound,
       setSentenceData: action.bound,
+      getSentence: action.bound,
     });
     autorun(this.logStoreDetails);
   }
@@ -40,6 +41,12 @@ class CardStore {
     this.prefix = data.prefix;
     this.suffix = data.suffix;
     this.correctAns = data.correctAns;
+  }
+
+  getSentence(): string {
+    return (
+      this.prefix.join(" ") + ` ${this.correctAns} ` + this.suffix.join(" ")
+    );
   }
 }
 

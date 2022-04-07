@@ -6,14 +6,18 @@ import store from "./store";
 
 export const Card = () => {
   const [answer, setAnswer] = useState("");
+  const [placeholder, setPlaceholder] = useState("");
   const { speak } = useSpeechSynthesis();
   const handleKeyDown = (key: string) => {
     if (key === "Enter") {
       if (answer.toLowerCase() === store.correctAns.toLowerCase()) {
         setAnswer(store.correctAns);
+        speak({ text: store.getSentence() });
       } else {
         speak({ text: store.correctAns });
         setAnswer("");
+        setPlaceholder(store.correctAns);
+        setTimeout(() => setPlaceholder(""), 2000);
       }
     }
   };
@@ -29,6 +33,7 @@ export const Card = () => {
           autoFocus
           type={"string"}
           value={answer}
+          placeholder={placeholder}
           onChange={(event) => setAnswer(event.target.value)}
           onKeyDown={(event) => handleKeyDown(event.key)}
         />
