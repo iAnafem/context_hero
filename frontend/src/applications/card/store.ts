@@ -14,6 +14,7 @@ class CardStore {
       suggestedAns: observable,
       fetch: action.bound,
       setSentenceData: action.bound,
+      setAnswer: action.bound,
     });
     autorun(this.logStoreDetails);
   }
@@ -42,6 +43,12 @@ class CardStore {
     this.prefix = data.prefix;
     this.suffix = data.suffix;
     this.correctAns = data.correctAns;
+  }
+
+  setAnswer(suggestedAns: string) {
+    if (suggestedAns === this.correctAns) {
+      this.suggestedAns = suggestedAns
+    }
   }
 }
 
