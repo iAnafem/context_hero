@@ -10,13 +10,13 @@ export const Card = () => {
   const { speak } = useSpeechSynthesis();
   const handleKeyDown = (key: string) => {
     if (key === "Enter") {
-      if (answer.toLowerCase() === store.correctAns.toLowerCase()) {
-        setAnswer(store.correctAns);
-        speak({ text: store.getSentence() });
+      if (answer.toLowerCase() === store.answer.toLowerCase()) {
+        setAnswer(store.answer);
+        speak({ text: store.getPhrase() });
       } else {
-        speak({ text: store.correctAns });
+        speak({ text: store.answer });
         setAnswer("");
-        setPlaceholder(store.correctAns);
+        setPlaceholder(store.answer);
         setTimeout(() => setPlaceholder(""), 2000);
       }
     }
@@ -42,6 +42,15 @@ export const Card = () => {
             {word}
           </span>
         ))}
+      </div>
+      <div className={"description"}>
+        {store.descriptionType === 1 ? (
+          <div>{store.answerTranslation}</div>
+        ) : (
+          <div>{store.answerExplanation}</div>
+        )}
+        <div>{store.answerTranslation}</div>
+        <div>{store.phraseTranslation}</div>
       </div>
     </div>
   );

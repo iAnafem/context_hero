@@ -1,24 +1,37 @@
 import { action, autorun, computed, makeObservable, observable } from "mobx";
+import { DescriptionType } from "./types";
+import { Card } from "./Card";
 
 class CardStore {
+  id: number = 1;
+  descriptionType: DescriptionType = 0;
   prefix: string[] = ["This", "is", "my", "test", "message."];
   suffix: string[] = ["-", "is", "the", "correct", "answer"];
-  correctAns: string = "ANSWER";
+  answer: string = "ANSWER";
+  answerExplanation: string = "There will be an answer description ";
+  phraseTranslation: string = "The whole sentence translation";
+  answerTranslation: string = "An answer translation";
 
   constructor() {
     makeObservable(this, {
+      id: observable,
+      descriptionType: observable,
       prefix: observable,
       suffix: observable,
-      correctAns: observable,
+      answer: observable,
+      answerExplanation: observable,
+      phraseTranslation: observable,
+      answerTranslation: observable,
       fetch: action.bound,
-      setSentenceData: action.bound,
-      getSentence: action.bound,
+      setPhraseData: action.bound,
+      getPhrase: action.bound,
+      switchDescriptionType: action.bound,
     });
     autorun(this.logStoreDetails);
   }
 
   get storeDetails() {
-    return `Correct answer is: ${this.correctAns} !`;
+    return `Correct answer is: ${this.answer} !`;
   }
 
   logStoreDetails = () => {
@@ -37,16 +50,18 @@ class CardStore {
       });
   }
 
-  setSentenceData(data: any) {
+  setPhraseData(data: any) {
     this.prefix = data.prefix;
     this.suffix = data.suffix;
-    this.correctAns = data.correctAns;
+    this.answer = data.answer;
   }
 
-  getSentence(): string {
-    return (
-      this.prefix.join(" ") + ` ${this.correctAns} ` + this.suffix.join(" ")
-    );
+  getPhrase(): string {
+    return this.prefix.join(" ") + ` ${this.answer} ` + this.suffix.join(" ");
+  }
+
+  switchDescriptionType(): number {
+    return this.descriptionType === 0 ? 1 : 0;
   }
 }
 
