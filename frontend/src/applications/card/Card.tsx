@@ -3,6 +3,7 @@ import "./card.css";
 // @ts-ignore
 import { useSpeechSynthesis } from "react-speech-kit";
 import store from "./store";
+import Switcher from "../../lib/components/switcher/Switcher";
 
 export const Card = () => {
   const [answer, setAnswer] = useState("");
@@ -44,10 +45,7 @@ export const Card = () => {
         ))}
       </div>
       <div>
-        <label className={"typeSwitch"}>
-          <input type={"checkbox"} />
-          <span className={"typeSlider round"} />
-        </label>
+        <Switcher handleChange={console.log} />
       </div>
       <div className={"description"}>
         {store.descriptionType === 1 ? (
