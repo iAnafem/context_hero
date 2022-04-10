@@ -43,13 +43,18 @@ export const Card = () => {
           </span>
         ))}
       </div>
+      <div>
+        <label className={"typeSwitch"}>
+          <input type={"checkbox"} />
+          <span className={"typeSlider round"} />
+        </label>
+      </div>
       <div className={"description"}>
         {store.descriptionType === 1 ? (
           <div>{store.answerTranslation}</div>
         ) : (
           <div>{store.answerExplanation}</div>
         )}
-        <div>{store.answerTranslation}</div>
         <div>{store.phraseTranslation}</div>
       </div>
     </div>
