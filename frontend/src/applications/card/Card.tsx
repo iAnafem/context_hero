@@ -4,24 +4,10 @@ import "./card.css";
 import { useSpeechSynthesis } from "react-speech-kit";
 import store from "./store";
 import Switcher from "../../lib/components/switcher/Switcher";
+import Input from "./input/Input";
 
 export const Card = () => {
-  const [answer, setAnswer] = useState("");
-  const [placeholder, setPlaceholder] = useState("");
   const { speak } = useSpeechSynthesis();
-  const handleKeyDown = (key: string) => {
-    if (key === "Enter") {
-      if (answer.toLowerCase() === store.answer.toLowerCase()) {
-        setAnswer(store.answer);
-        speak({ text: store.getPhrase() });
-      } else {
-        speak({ text: store.answer });
-        setAnswer("");
-        setPlaceholder(store.answer);
-        setTimeout(() => setPlaceholder(""), 2000);
-      }
-    }
-  };
   return (
     <div className={"card"}>
       <div className={"phrase"}>
@@ -30,14 +16,7 @@ export const Card = () => {
             {word}
           </span>
         ))}
-        <input
-          autoFocus
-          type={"string"}
-          value={answer}
-          placeholder={placeholder}
-          onChange={(event) => setAnswer(event.target.value)}
-          onKeyDown={(event) => handleKeyDown(event.key)}
-        />
+        <Input store={store} speak={speak} />
         {store.suffix.map((word: string, idx: number) => (
           <span className={"word"} key={`${word}_${idx}`}>
             {word}

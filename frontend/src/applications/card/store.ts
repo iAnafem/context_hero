@@ -1,8 +1,7 @@
 import { action, autorun, computed, makeObservable, observable } from "mobx";
 import { DescriptionType } from "./types";
-import { Card } from "./Card";
 
-class CardStore {
+export class CardStore {
   id: number = 1;
   descriptionType: DescriptionType = 0;
   prefix: string[] = ["This", "is", "my", "test", "message."];
