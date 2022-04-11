@@ -30,7 +30,7 @@ export class CardStore {
   }
 
   get storeDetails() {
-    return `Correct answer is: ${this.answer} !`;
+    return `Correct answer is: ${this.answer} ! ${this.descriptionType}`;
   }
 
   logStoreDetails = () => {
@@ -59,8 +59,8 @@ export class CardStore {
     return this.prefix.join(" ") + ` ${this.answer} ` + this.suffix.join(" ");
   }
 
-  switchDescriptionType(): number {
-    return this.descriptionType === 0 ? 1 : 0;
+  switchDescriptionType(): void {
+    this.descriptionType = this.descriptionType === 0 ? 1 : 0;
   }
 }
 

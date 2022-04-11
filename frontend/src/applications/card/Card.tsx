@@ -5,8 +5,9 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import store from "./store";
 import Switcher from "../../lib/components/switcher/Switcher";
 import Input from "./input/Input";
+import { observer } from "mobx-react";
 
-export const Card = () => {
+export const Card = observer(() => {
   const { speak } = useSpeechSynthesis();
   return (
     <div className={"card"}>
@@ -24,7 +25,7 @@ export const Card = () => {
         ))}
       </div>
       <div>
-        <Switcher handleChange={console.log} />
+        <Switcher handleChange={store.switchDescriptionType} />
       </div>
       <div className={"description"}>
         {store.descriptionType === 1 ? (
@@ -36,4 +37,4 @@ export const Card = () => {
       </div>
     </div>
   );
-};
+});
