@@ -42,3 +42,26 @@
   position: absolute;
   right: 0;
 }
+
+.ansTranslation {
+  min-height: 30px;
+  font-size: 20px;
+  font-weight: 550;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.ansExplanation {
+  min-height: 30px;
+  font-size: 16px;
+  font-style: oblique;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.phraseTranslation {
+  font-size: 14px;
+  font-style: oblique;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}

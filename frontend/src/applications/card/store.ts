@@ -9,8 +9,9 @@ export class CardStore {
   answer: string = "ANSWER";
   answerType: string = "noun";
   answerExplanation: string = "There will be an answer description ";
-  phraseTranslation: string = "The whole sentence translation";
-  answerTranslation: string = "An answer translation";
+  phraseTranslation: string =
+    "Это моё тестовое сообщение. ОТВЕТ - правильный ответ";
+  answerTranslation: string = "ОТВЕТ";
 
   constructor() {
     makeObservable(this, {

@@ -32,11 +32,11 @@ export const Card = observer(() => {
       </div>
       <div className={"description"}>
         {store.descriptionType === 1 ? (
-          <div>{store.answerTranslation}</div>
+          <div className={"ansTranslation"}>{store.answerTranslation}</div>
         ) : (
-          <div>{store.answerExplanation}</div>
+          <div className={"ansExplanation"}>{store.answerExplanation}</div>
         )}
-        <div>{store.phraseTranslation}</div>
+        <div className={"phraseTranslation"}>{store.phraseTranslation}</div>
       </div>
     </div>
   );
