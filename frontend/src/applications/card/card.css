@@ -25,5 +25,20 @@
 .description {
   border-top: 1px solid grey;
   padding-top: 10px;
-  margin-top: 10px;
+  margin-top: 30px;
+}
+
+.typePanel {
+  padding-top: 10px;
+  position: relative;
+  display: block;
+}
+
+.answerType {
+  position: absolute;
+  left: 0;
+}
+.typeSwitcher {
+  position: absolute;
+  right: 0;
 }

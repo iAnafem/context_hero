@@ -24,8 +24,11 @@ export const Card = observer(() => {
           </span>
         ))}
       </div>
-      <div>
-        <Switcher handleChange={store.switchDescriptionType} />
+      <div className={"typePanel"}>
+        <span className={"answerType"}>{store.answerType}</span>
+        <span className={"typeSwitcher"}>
+          <Switcher handleChange={store.switchDescriptionType} />
+        </span>
       </div>
       <div className={"description"}>
         {store.descriptionType === 1 ? (

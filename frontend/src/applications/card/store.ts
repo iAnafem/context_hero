@@ -7,6 +7,7 @@ export class CardStore {
   prefix: string[] = ["This", "is", "my", "test", "message."];
   suffix: string[] = ["-", "is", "the", "correct", "answer"];
   answer: string = "ANSWER";
+  answerType: string = "noun";
   answerExplanation: string = "There will be an answer description ";
   phraseTranslation: string = "The whole sentence translation";
   answerTranslation: string = "An answer translation";
