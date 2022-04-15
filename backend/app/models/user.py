@@ -9,3 +9,5 @@ class BaseUser(CoreModel):
     is_active: bool = True
     is_superuser: bool = False
 
+class UserModel(BaseUser):
+    pass
