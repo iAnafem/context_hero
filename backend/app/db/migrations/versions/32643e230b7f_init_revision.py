@@ -26,14 +26,46 @@ def create_test_table() -> None:
     )
 
 
+def create_english_word_table() -> None:
+    op.create_table(
+        "english_word",
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("word", sa.String, nullable=False),
+        sa.Column("explanation", sa.String, nullable=False),
+        sa.Column("category_id", sa.Integer, nullable=True),
+        sa.Column("translation_id", sa.Integer, nullable=False)
+    )
+
+
+def create_translation_table() -> None:
+    op.create_table(
+        "translation",
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("russian_id", sa.Integer, nullable=True),
+        sa.Column("english_id", sa.Integer, nullable=True),
+    )
+
+
 def insert_test_entry() -> None:
     op.execute(
         "INSERT INTO test_table (msg) values ('Hello, db is here!')")
 
 
+def insert_test_word_entry() -> None:
+    op.execute(
+        """
+        INSERT INTO 'english_word' (word, explanation, category_id, translation_id) 
+        VALUES ('testword', 'test explanation!', 1, 1)
+        """
+    )
+
+
 def upgrade() -> None:
     create_test_table()
+    create_english_word_table()
+    create_translation_table()
     insert_test_entry()
+    insert_test_word_entry()
 
 
 def downgrade() -> None:
