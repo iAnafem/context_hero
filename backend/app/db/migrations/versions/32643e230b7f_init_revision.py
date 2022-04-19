@@ -18,14 +18,6 @@ depends_on = None
 test_table = "test_table"
 
 
-def create_test_table() -> None:
-    op.create_table(
-        test_table,
-        sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("msg", sa.Text, nullable=False, index=True),
-    )
-
-
 def create_english_word_table() -> None:
     op.create_table(
         "english_word",
@@ -46,25 +38,18 @@ def create_translation_table() -> None:
     )
 
 
-def insert_test_entry() -> None:
-    op.execute(
-        "INSERT INTO test_table (msg) values ('Hello, db is here!')")
-
-
 def insert_test_word_entry() -> None:
     op.execute(
         """
-        INSERT INTO 'english_word' (word, explanation, category_id, translation_id) 
+        INSERT INTO english_word (word, explanation, category_id, translation_id) 
         VALUES ('testword', 'test explanation!', 1, 1)
         """
     )
 
 
 def upgrade() -> None:
-    create_test_table()
     create_english_word_table()
     create_translation_table()
-    insert_test_entry()
     insert_test_word_entry()
 
 
