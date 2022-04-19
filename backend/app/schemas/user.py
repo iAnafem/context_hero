@@ -1,4 +1,4 @@
-from app.models.core import CoreModel, DateTimeModelMixin, IDModelMixin
+from app.schemas.core import CoreModel, DateTimeModelMixin, IDModelMixin
 from typing import Optional
 from pydantic import EmailStr
 

@@ -1,5 +1,5 @@
 from databases import Database
-from app.models.test_model import TestModel
+from app.schemas.test_model import TestModel
 
 GET_GREETING_FROM_DB = """
     SELECT * FROM test_table;
