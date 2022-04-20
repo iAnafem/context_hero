@@ -17,9 +17,17 @@ depends_on = None
 
 
 def create_user_table() -> None:
-    pass
+    op.create_table(
+        "user",
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("nick_name", sa.String(255), nullable=False),
+        sa.Column("email", sa.String(255), nullable=False),
+        sa.Column("first_name", sa.String(255), nullable=True),
+        sa.Column("last_name", sa.String(255), nullable=True),
+    )
 
-def create_phrase_table() -> None:
+
+def create_english_phrase_table() -> None:
     op.create_table(
         "english_phrase",
         sa.Column("id", sa.Integer, primary_key=True),
@@ -28,13 +36,19 @@ def create_phrase_table() -> None:
         sa.Column("prefix", sa.String(length=255), nullable=True),
         sa.Column("suffix", sa.String(length=255), nullable=True),
         sa.Column("translation", sa.String, nullable=False),
-        sa.ForeignKeyConstraint(["user_id", "user.id"], ["word_id", "english_word.id"], ),
+        sa.ForeignKeyConstraint(["user_id"], ["user.id"]),
+        sa.ForeignKeyConstraint(["word_id"], ["english_word.id"]),
     )
-    op.create_index("english_phrase__user", "english_phrase", "user_id")
+    op.create_index(
+        index_name="english_phrase__user",
+        table_name="english_phrase",
+        columns=["user_id"],
+    )
 
 
 def upgrade() -> None:
-    create_phrase_table()
+    create_user_table()
+    create_english_phrase_table()
     op.drop_table("test_table")
 
 
