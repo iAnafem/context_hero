@@ -18,14 +18,12 @@ depends_on = None
 test_table = "test_table"
 
 
-def create_english_word_table() -> None:
+def create_category_table() -> None:
     op.create_table(
-        "english_word",
+        "category",
         sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("word", sa.String, nullable=False),
-        sa.Column("explanation", sa.String, nullable=False),
-        sa.Column("category_id", sa.Integer, nullable=True),
-        sa.Column("translation_id", sa.Integer, nullable=False)
+        sa.Column("name", sa.String),
+        sa.Column("language", sa.String)
     )
 
 
@@ -33,26 +31,46 @@ def create_translation_table() -> None:
     op.create_table(
         "translation",
         sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("russian_id", sa.Integer, nullable=True),
-        sa.Column("english_id", sa.Integer, nullable=True),
+        sa.Column("eng_w_id", sa.String),
+        sa.Column("rus_w_id", sa.String)
     )
 
 
-def insert_test_word_entry() -> None:
-    op.execute(
-        """
-        INSERT INTO english_word (word, explanation, category_id, translation_id) 
-        VALUES ('testword', 'test explanation!', 1, 1)
-        """
+def create_english_word_table() -> None:
+    op.create_table(
+        "english_word",
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("word", sa.String, nullable=False),
+        sa.Column("explanation", sa.String, nullable=False),
+        sa.Column("category_id", sa.Integer, nullable=True),
+        sa.Column("translation_id", sa.Integer, nullable=False),
+        sa.ForeignKeyConstraint(["category_id"], ["category.id"]),
+        sa.ForeignKeyConstraint(["translation_id"], ["translation.id"]),
+    )
+
+
+def create_russian_word_table() -> None:
+    op.create_table(
+        "russian_word",
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("word", sa.String, nullable=False),
+        sa.Column("explanation", sa.String, nullable=False),
+        sa.Column("category_id", sa.Integer, nullable=True),
+        sa.Column("translation_id", sa.Integer, nullable=False),
+        sa.ForeignKeyConstraint(["category_id"], ["category.id"]),
+        sa.ForeignKeyConstraint(["translation_id"], ["translation.id"]),
     )
 
 
 def upgrade() -> None:
-    create_english_word_table()
+    create_category_table()
     create_translation_table()
-    insert_test_word_entry()
+    create_english_word_table()
+    create_russian_word_table()
 
 
 def downgrade() -> None:
-    op.drop_table("english_word")
-    op.drop_table("translation")
+    op.drop_table('russian_word')
+    op.drop_table('english_word')
+    op.drop_table('translation')
+    op.drop_table('category')

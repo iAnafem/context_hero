@@ -16,9 +16,9 @@ branch_labels = None
 depends_on = None
 
 
-def create_user_table() -> None:
+def create_person_table() -> None:
     op.create_table(
-        "user",
+        "person",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("nick_name", sa.String(255), nullable=False),
         sa.Column("email", sa.String(255), nullable=False),
@@ -32,26 +32,25 @@ def create_english_phrase_table() -> None:
         "english_phrase",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("word_id", sa.Integer, nullable=False),
-        sa.Column("user_id", sa.Integer, nullable=False),
+        sa.Column("person_id", sa.Integer, nullable=False),
         sa.Column("prefix", sa.String(length=255), nullable=True),
         sa.Column("suffix", sa.String(length=255), nullable=True),
         sa.Column("translation", sa.String, nullable=False),
-        sa.ForeignKeyConstraint(["user_id"], ["user.id"]),
+        sa.ForeignKeyConstraint(["person_id"], ["person.id"]),
         sa.ForeignKeyConstraint(["word_id"], ["english_word.id"]),
     )
     op.create_index(
-        index_name="english_phrase__user",
+        index_name="english_phrase__person",
         table_name="english_phrase",
-        columns=["user_id"],
+        columns=["person_id"],
     )
 
 
 def upgrade() -> None:
-    create_user_table()
+    create_person_table()
     create_english_phrase_table()
-    op.drop_table("test_table")
 
 
 def downgrade() -> None:
     op.drop_table("english_phrase")
-    op.drop_table("user")
+    op.drop_table("person")
