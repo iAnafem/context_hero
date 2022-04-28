@@ -11,7 +11,7 @@ const App = observer(() => {
 
   let backend_url = "http://localhost:8000/api/";
 
-  let db_url = "http://localhost:8000/api/hello_db/";
+  let db_url = "http://localhost:8000/api/cards/list";
 
   const handleClick = (url: string, handler: Function) => {
     let headers = { "Content-Type": "application/json" };

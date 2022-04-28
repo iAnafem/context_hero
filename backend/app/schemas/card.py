@@ -1,5 +1,5 @@
-from core import CoreModel
-from user import UserModel
+from app.schemas.core import CoreModel
+from app.schemas.user import UserModel
 
 
 class WordModel(CoreModel):
@@ -20,7 +20,12 @@ class PhraseModel(CoreModel):
     user: UserModel
 
 
-class CardModel(CoreModel):
+class CardInDB(CoreModel):
     """Represents a card model"""
     id: int
-    phrase: PhraseModel
+    person_id: int
+    prefix: str
+    suffix: str
+    translation: str
+    word: str
+    explanation: str
