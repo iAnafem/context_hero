@@ -66,7 +66,7 @@ def insert_test_data() -> None:
             """
             INSERT INTO russian_word (word, explanation, category_id)
             values ('перевод_слова_{num} вариант 2', 'Объяснение слова {rus_num}', 1)
-            """.format(num=num, rus_num=rus_num)
+            """.format(num=num, rus_num=rus_num )
         )
 
 def upgrade() -> None:

@@ -27,8 +27,8 @@ class CardInDB(CoreModel):
     person_id: int
     prefix: str
     suffix: str
-    translation: str
+    phrase_translation: str
     word: str
     explanation: str
     category: str
-    words: List[str]
+    word_translation: List[str]

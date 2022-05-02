@@ -8,10 +8,11 @@ export class CardStore {
   suffix: string[] = ["-", "is", "the", "correct", "answer"];
   answer: string = "ANSWER";
   answerType: string = "noun";
+  category: string = "common";
   answerExplanation: string = "There will be an answer description ";
   phraseTranslation: string =
     "Это моё тестовое сообщение. ОТВЕТ - правильный ответ";
-  answerTranslation: string = "ОТВЕТ";
+  answerTranslation: string[] = ["ОТВЕТ"];
 
   constructor() {
     makeObservable(this, {
@@ -20,12 +21,12 @@ export class CardStore {
       prefix: observable,
       suffix: observable,
       answer: observable,
+      category: observable,
       answerExplanation: observable,
       phraseTranslation: observable,
       answerTranslation: observable,
       fetch: action.bound,
-      setPhraseData: action.bound,
-      getPhrase: action.bound,
+      setCardData: action.bound,
       switchDescriptionType: action.bound,
     });
     autorun(this.logStoreDetails);
@@ -51,10 +52,17 @@ export class CardStore {
       });
   }
 
-  setPhraseData(data: any) {
-    this.prefix = data.prefix;
-    this.suffix = data.suffix;
-    this.answer = data.answer;
+  setCardData(data: any) {
+    data = data[0];
+    console.log(data);
+    this.id = data.id;
+    this.prefix = data.prefix.split(" ");
+    this.suffix = data.suffix.split(" ");
+    this.phraseTranslation = data.phrase_translation;
+    this.answer = data.word;
+    this.answerExplanation = data.explanation;
+    this.category = data.category;
+    this.answerTranslation = data.word_translation;
   }
 
   getPhrase(): string {

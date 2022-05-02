@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { EffectCallback, useEffect, useState } from "react";
 import "./card.css";
 // @ts-ignore
 import { useSpeechSynthesis } from "react-speech-kit";
@@ -9,6 +9,13 @@ import { observer } from "mobx-react";
 
 export const Card = observer(() => {
   const { speak } = useSpeechSynthesis();
+
+  useEffect((): any => {
+    return store.fetch(
+      "http://localhost:8000/api/cards/list",
+      store.setCardData
+    );
+  }, []);
   return (
     <div className={"card"}>
       <div className={"phrase"}>

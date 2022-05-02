@@ -3,11 +3,11 @@ FETCH_CARDS_LIST = """
         , p.person_id   AS person_id
         , p.prefix      AS prefix
         , p.suffix      AS suffix
-        , p.translation AS translation
+        , p.translation AS phrase_translation
         , w.word        AS word
         , w.explanation AS explanation
         , c.name        AS category
-        , tr.words
+        , tr.words      AS word_translation
     FROM english_phrase AS p
     INNER JOIN english_word AS w
     ON p.word_id = w.id
@@ -21,5 +21,6 @@ FETCH_CARDS_LIST = """
     group by t.eng_w_id
     ) as tr
     ON w.id = tr.eng_w_id
+    LIMIT 1
 """
 
