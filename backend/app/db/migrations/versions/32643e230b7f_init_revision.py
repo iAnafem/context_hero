@@ -31,8 +31,8 @@ def create_translation_table() -> None:
     op.create_table(
         "translation",
         sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("eng_w_id", sa.String),
-        sa.Column("rus_w_id", sa.String)
+        sa.Column("eng_w_id", sa.Integer),
+        sa.Column("rus_w_id", sa.Integer)
     )
 
 
@@ -43,9 +43,7 @@ def create_english_word_table() -> None:
         sa.Column("word", sa.String, nullable=False),
         sa.Column("explanation", sa.String, nullable=False),
         sa.Column("category_id", sa.Integer, nullable=True),
-        sa.Column("translation_id", sa.Integer, nullable=False),
         sa.ForeignKeyConstraint(["category_id"], ["category.id"]),
-        sa.ForeignKeyConstraint(["translation_id"], ["translation.id"]),
     )
 
 
@@ -56,9 +54,7 @@ def create_russian_word_table() -> None:
         sa.Column("word", sa.String, nullable=False),
         sa.Column("explanation", sa.String, nullable=False),
         sa.Column("category_id", sa.Integer, nullable=True),
-        sa.Column("translation_id", sa.Integer, nullable=False),
         sa.ForeignKeyConstraint(["category_id"], ["category.id"]),
-        sa.ForeignKeyConstraint(["translation_id"], ["translation.id"]),
     )
 
 

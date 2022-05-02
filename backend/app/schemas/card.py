@@ -1,5 +1,6 @@
 from app.schemas.core import CoreModel
 from app.schemas.user import UserModel
+from typing import List
 
 
 class WordModel(CoreModel):
@@ -29,3 +30,5 @@ class CardInDB(CoreModel):
     translation: str
     word: str
     explanation: str
+    category: str
+    words: List[str]

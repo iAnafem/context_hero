@@ -38,14 +38,14 @@ def insert_test_data() -> None:
         )
         op.execute(
             """
-            INSERT INTO english_word (word, explanation, category_id, translation_id)
-            values ('test_word_{num}', 'test explanation of word {num}', 1, {num})
+            INSERT INTO english_word (word, explanation, category_id)
+            values ('test_word_{num}', 'test explanation of word {num}', 1)
             """.format(num=num)
         )
         op.execute(
             """
-            INSERT INTO russian_word (word, explanation, category_id, translation_id)
-            values ('перевод_слова_{num}', 'Объяснение слова {num}', 1, {num})
+            INSERT INTO russian_word (word, explanation, category_id)
+            values ('перевод_слова_{num} вариант 1', 'Объяснение слова {num}', 1)
             """.format(num=num)
         )
 
@@ -55,7 +55,19 @@ def insert_test_data() -> None:
             values ({num}, 1, 'This is the test phrase number {num} and', '- the correct answer', 'Это перевод тестовой фразы номер {num}')
             """.format(num=num)
         )
-
+    for num, rus_num in zip(range(1, 51), range(50, 101)):
+        op.execute(
+            """
+            INSERT INTO translation (eng_w_id, rus_w_id)
+            values ({num}, {rus_num})
+            """.format(num=num, rus_num=rus_num)
+        )
+        op.execute(
+            """
+            INSERT INTO russian_word (word, explanation, category_id)
+            values ('перевод_слова_{num} вариант 2', 'Объяснение слова {rus_num}', 1)
+            """.format(num=num, rus_num=rus_num)
+        )
 
 def upgrade() -> None:
     insert_test_data()
