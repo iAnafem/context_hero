@@ -18,8 +18,20 @@ export interface ICard {
   answerTranslation: string[];
 }
 
+export interface ICardFromDB {
+  id: number;
+  person_id: number;
+  prefix: string;
+  suffix: string;
+  phrase_translation: string;
+  word: string;
+  explanation: string;
+  category: string;
+  word_translation: string[];
+}
+
 export interface ICardsStack {
-  items?: object[];
+  items: ICardFromDB[] | object[];
   currNum: number;
   isLoading: boolean;
   isLoaded: boolean;

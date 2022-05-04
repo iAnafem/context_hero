@@ -1,8 +1,8 @@
-import { ICardsStack } from "../types";
+import { ICardFromDB, ICardsStack } from "../types";
 import { action, makeObservable, observable } from "mobx";
 
 class CardsStackStore implements ICardsStack {
-  items = [{}];
+  items: any[] = [];
   currNum = 1;
   isLoaded = false;
   isLoading = true;
@@ -20,15 +20,15 @@ class CardsStackStore implements ICardsStack {
     });
   }
 
-  private get(idx: number): object {
-    return this.items[idx];
+  private get(idx: number): ICardFromDB {
+    return this?.items[idx];
   }
 
   getCurrent(): object {
     return this.get(this.currNum - 1);
   }
 
-  private setItems(data: object[]): void {
+  private setItems(data: ICardFromDB[]): void {
     this.items = data;
   }
 
@@ -48,7 +48,7 @@ class CardsStackStore implements ICardsStack {
     return this.get(this.currNum);
   }
 
-  insert(idx: number, data: object): void {
+  insert(idx: number, data: ICardFromDB): void {
     this.items.splice(idx, 0, data);
   }
 }

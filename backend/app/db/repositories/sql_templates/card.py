@@ -21,6 +21,5 @@ FETCH_CARDS_LIST = """
     group by t.eng_w_id
     ) as tr
     ON w.id = tr.eng_w_id
-    LIMIT 1
 """
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import instance from "./store";
 import { observer, Provider } from "mobx-react";
-import StudyCards from "./applications/study_cards/StudyCards";
+import { StudyCards } from "./applications/study_cards/StudyCards";
 
 const App = observer(() => {
   const [backend_msg, setBackMsg] = useState("");
