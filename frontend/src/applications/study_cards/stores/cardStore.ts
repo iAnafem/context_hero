@@ -1,18 +1,17 @@
 import { action, autorun, computed, makeObservable, observable } from "mobx";
-import { DescriptionType } from "./types";
+import { DescriptionType, ICard } from "../types";
 
-export class CardStore {
-  id: number = 1;
-  descriptionType: DescriptionType = 0;
-  prefix: string[] = ["This", "is", "my", "test", "message."];
-  suffix: string[] = ["-", "is", "the", "correct", "answer"];
-  answer: string = "ANSWER";
-  answerType: string = "noun";
-  category: string = "common";
-  answerExplanation: string = "There will be an answer description ";
-  phraseTranslation: string =
-    "Это моё тестовое сообщение. ОТВЕТ - правильный ответ";
-  answerTranslation: string[] = ["ОТВЕТ"];
+export class CardStore implements ICard {
+  id = 1;
+  descriptionType = 0;
+  prefix = ["This", "is", "my", "test", "message."];
+  suffix = ["-", "is", "the", "correct", "answer"];
+  answer = "ANSWER";
+  answerType = "noun";
+  category = "common";
+  answerExplanation = "There will be an answer description ";
+  phraseTranslation = "Это моё тестовое сообщение. ОТВЕТ - правильный ответ";
+  answerTranslation = ["ОТВЕТ"];
 
   constructor() {
     makeObservable(this, {

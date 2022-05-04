@@ -2,9 +2,9 @@ import React, { EffectCallback, useEffect, useState } from "react";
 import "./card.css";
 // @ts-ignore
 import { useSpeechSynthesis } from "react-speech-kit";
-import store from "./store";
-import Switcher from "../../lib/components/switcher/Switcher";
-import Input from "./input/Input";
+import store from "../stores/cardStore";
+import Switcher from "../../../lib/components/switcher/Switcher";
+import Input from "../input/Input";
 import { observer } from "mobx-react";
 
 export const Card = observer(() => {

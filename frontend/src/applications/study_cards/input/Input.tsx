@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./input.css";
-import store from "../store";
+import store from "../stores/cardStore";
 import { TInput } from "../types";
 
 export default function Input(props: TInput) {

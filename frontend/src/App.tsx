@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import instance from "./store";
 import { observer, Provider } from "mobx-react";
-import { Card } from "./applications/card/Card";
+import StudyCards from "./applications/study_cards/StudyCards";
 
 const App = observer(() => {
   const [backend_msg, setBackMsg] = useState("");
@@ -28,7 +28,7 @@ const App = observer(() => {
   return (
     <Provider store>
       <div>
-        <Card />
+        <StudyCards />
         <p>Hello from React default project</p>
         <button
           type="button"
