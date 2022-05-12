@@ -13,6 +13,7 @@ class CardsStackStore implements ICardsStack {
       currNum: observable,
       isLoaded: observable,
       isLoading: observable,
+      setItems: action.bound,
       fetch: action.bound,
       getCurrent: action.bound,
       next: action.bound,
@@ -24,17 +25,19 @@ class CardsStackStore implements ICardsStack {
     return this?.items[idx];
   }
 
-  getCurrent(): object {
+  getCurrent(): ICardFromDB {
     return this.get(this.currNum - 1);
   }
 
-  private setItems(data: ICardFromDB[]): void {
+  setItems(data: ICardFromDB[]): void {
     this.items = data;
+    this.isLoaded = true;
+    this.isLoading = false;
   }
 
   fetch() {
     let headers = { "Content-Type": "application/json" };
-    return fetch("http://localhost:8000/api/cards/list", {
+    return fetch("http://localhost:8000/api/cards/stack", {
       method: "GET",
       headers: headers,
     })
@@ -44,12 +47,14 @@ class CardsStackStore implements ICardsStack {
       });
   }
 
-  next(): object {
-    return this.get(this.currNum);
+  next(): void {
+    console.log("here! currNum is = ", this.currNum);
+    this.currNum += 1;
+    console.log(this.currNum);
   }
 
-  insert(idx: number, data: ICardFromDB): void {
-    this.items.splice(idx, 0, data);
+  insert(idx: number, card: ICardFromDB): void {
+    this.items.splice(idx, 0, card);
   }
 }
 

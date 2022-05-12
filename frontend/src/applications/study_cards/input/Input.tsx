@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./input.css";
-import store from "../stores/cardStore";
+import cardStore from "../stores/cardStore";
+import stackStore from "../stores/cardsStackStore";
 import { TInput } from "../types";
 
 export default function Input(props: TInput) {
@@ -9,10 +10,11 @@ export default function Input(props: TInput) {
   const handleKeyDown = (key: string) => {
     if (key === "Enter") {
       if (answer.toLowerCase() === props.store.answer.toLowerCase()) {
-        setAnswer(store.answer);
+        setAnswer(cardStore.answer);
         props.speak({
           text: props.store.getPhrase(),
         } as SpeechSynthesisUtterance);
+        stackStore.next();
       } else {
         props.speak({ text: props.store.answer } as SpeechSynthesisUtterance);
         setAnswer("");
