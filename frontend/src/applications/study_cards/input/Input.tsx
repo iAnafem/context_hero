@@ -8,17 +8,21 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function Input(props: TInput) {
   const [answer, setAnswer] = useState("");
+  const [color, setColor] = useState("grey");
   const [placeholder, setPlaceholder] = useState("");
   const onEnd = () => {
     stackStore.next();
     setAnswer("");
+    setColor("grey");
   };
   const correctAnswerSpeech = useSpeechSynthesis({ onEnd });
   const incorrectAnswerSpeech = useSpeechSynthesis();
-
+  const isAnswerCorrect = (answer: string) =>
+    answer.toLowerCase() === props.store.answer.toLowerCase();
   const handleKeyDown = (key: string) => {
     if (key === "Enter") {
-      if (answer.toLowerCase() === props.store.answer.toLowerCase()) {
+      if (isAnswerCorrect(answer)) {
+        setColor("green");
         setAnswer(cardStore.answer);
         correctAnswerSpeech.speak({
           text: props.store.getPhrase(),
@@ -37,10 +41,12 @@ export default function Input(props: TInput) {
     <input
       autoFocus
       type={"string"}
+      className={"placeholder"}
       value={answer}
       placeholder={placeholder}
       onChange={(event) => setAnswer(event.target.value)}
       onKeyDown={(event) => handleKeyDown(event.key)}
+      style={{ color: color }}
     />
   );
 }

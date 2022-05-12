@@ -29,7 +29,9 @@ export const Card = observer(() => {
       </div>
       <div className={"description"}>
         {cardStore.descriptionType === 1 ? (
-          <div className={"ansTranslation"}>{cardStore.answerTranslation}</div>
+          <div className={"ansTranslation"}>
+            {cardStore.answerTranslation.join(", ")}
+          </div>
         ) : (
           <div className={"ansExplanation"}>{cardStore.answerExplanation}</div>
         )}
