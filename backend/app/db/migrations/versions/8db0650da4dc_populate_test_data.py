@@ -55,7 +55,7 @@ def insert_test_data() -> None:
             values ({num}, 1, 'This is the test phrase number {num} and', '- the correct answer', 'Это перевод тестовой фразы номер {num}')
             """.format(num=num)
         )
-    for num, rus_num in zip(range(1, 51), range(50, 101)):
+    for num, rus_num in zip(range(1, 51), range(51, 101)):
         op.execute(
             """
             INSERT INTO translation (eng_w_id, rus_w_id)

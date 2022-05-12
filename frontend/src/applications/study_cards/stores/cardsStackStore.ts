@@ -48,9 +48,7 @@ class CardsStackStore implements ICardsStack {
   }
 
   next(): void {
-    console.log("here! currNum is = ", this.currNum);
     this.currNum += 1;
-    console.log(this.currNum);
   }
 
   insert(idx: number, card: ICardFromDB): void {
