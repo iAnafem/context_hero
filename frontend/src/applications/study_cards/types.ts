@@ -44,5 +44,4 @@ export enum DescriptionType {
 
 export type TInput = {
   store: CardStore;
-  speak: useSpeechSynthesis;
 };

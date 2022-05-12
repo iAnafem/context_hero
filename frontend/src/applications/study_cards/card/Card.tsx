@@ -1,15 +1,11 @@
 import React, { EffectCallback, useEffect, useState } from "react";
 import "./card.css";
-// @ts-ignore
-import { useSpeechSynthesis } from "react-speech-kit";
 import cardStore from "../stores/cardStore";
 import Switcher from "../../../lib/components/switcher/Switcher";
 import Input from "../input/Input";
 import { observer } from "mobx-react";
 
 export const Card = observer(() => {
-  const { speak } = useSpeechSynthesis();
-
   return (
     <div className={"card"}>
       <div className={"phrase"}>
@@ -18,7 +14,7 @@ export const Card = observer(() => {
             {word}
           </span>
         ))}
-        <Input store={cardStore} speak={speak} />
+        <Input store={cardStore} />
         {cardStore.suffix.map((word: string, idx: number) => (
           <span className={"word"} key={`${word}_${idx}`}>
             {word}
