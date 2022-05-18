@@ -10,29 +10,31 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic
-revision = '0d217f3ffae4'
-down_revision = '8db0650da4dc'
+revision = "0d217f3ffae4"
+down_revision = "8db0650da4dc"
 branch_labels = None
 depends_on = None
 
 
 def get_created_at(custom_name: str = None, indexed: bool = False) -> sa.Column:
-    name = 'created_at' if custom_name is None else custom_name
-    return sa.Column(
+    name = "created_at" if custom_name is None else custom_name
+    return (
+        sa.Column(
             name,
             sa.TIMESTAMP(timezone=True),
             server_default=sa.func.now(),
             nullable=False,
-            index=indexed
+            index=indexed,
         ),
+    )
 
 
-def create_progress_table() -> None:
+def create_grade_table() -> None:
     op.create_table(
-        "english_progress",
+        "english_grade",
         sa.Column("person_id", sa.Integer, sa.ForeignKey("person.id"), nullable=False),
         sa.Column("word_id", sa.Integer, sa.ForeignKey("english_word.id"), nullable=False),
-        sa.Column("grade", sa.Integer, nullable=False, server_default=0),
+        sa.Column("grade", sa.Integer, nullable=False, default=0),
         *get_created_at(custom_name="first_attempt", indexed=True),
         sa.Column(
             "last_attempt",
@@ -40,9 +42,9 @@ def create_progress_table() -> None:
             server_default=sa.func.now(),
             onupdate=sa.func.now(),
             nullable=False,
-            index=True
+            index=True,
         ),
-        sa.PrimaryKeyConstraint('person_id', 'word_id', name='english_progress_pk')
+        sa.PrimaryKeyConstraint("person_id", "word_id", name="english_progress_pk")
     )
 
 
@@ -55,8 +57,8 @@ def add_created_at_cols() -> None:
     op.add_column("person", *get_created_at(indexed=True))
 
 
-def drop_progress_table() -> None:
-    op.drop_table("english_progress")
+def drop_grade_table() -> None:
+    op.drop_table("english_grade")
 
 
 def drop_created_at_cols() -> None:
@@ -69,10 +71,10 @@ def drop_created_at_cols() -> None:
 
 
 def upgrade() -> None:
-    create_progress_table()
+    create_grade_table()
     add_created_at_cols()
 
 
 def downgrade() -> None:
-    drop_progress_table()
+    drop_grade_table()
     drop_created_at_cols()

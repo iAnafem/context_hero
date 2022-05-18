@@ -5,8 +5,10 @@ from pydantic import EmailStr
 
 class BaseUser(CoreModel):
     """Without credentials"""
+
     is_active: bool = True
     is_superuser: bool = False
 
+
 class UserModel(BaseUser):
-    pass
+    id: int

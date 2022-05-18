@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app.schemas.core import CoreModel
 from app.schemas.user import UserModel
 from typing import List
@@ -23,6 +25,7 @@ class PhraseModel(CoreModel):
 
 class CardInDB(CoreModel):
     """Represents a card model"""
+
     id: int
     person_id: int
     prefix: str
@@ -32,3 +35,11 @@ class CardInDB(CoreModel):
     explanation: str
     category: str
     word_translation: List[str]
+
+
+class GradeInDB(CoreModel):
+
+    person_id: int
+    word_id: int
+    grade: int
+    last_attempt: datetime
