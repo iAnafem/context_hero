@@ -3,12 +3,14 @@ from typing import Optional
 from pydantic import EmailStr
 
 
-class BaseUser(CoreModel):
+class PersonBase(CoreModel):
     """Without credentials"""
 
+    nick_name: Optional[str]
+    email: Optional[EmailStr]
     is_active: bool = True
     is_superuser: bool = False
 
 
-class UserModel(BaseUser):
-    id: int
+class PersonInDB(PersonBase, DateTimeModelMixin, IDModelMixin):
+    email: EmailStr

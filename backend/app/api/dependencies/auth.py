@@ -1,5 +1,5 @@
-from app.schemas.user import UserModel
+from app.schemas.auth import PersonInDB
 
 
-async def get_user_from_token() -> UserModel:
-    return UserModel(id=1)
+async def get_user_from_token() -> PersonInDB:
+    return PersonInDB(id=1)

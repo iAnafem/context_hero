@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from app.schemas.core import CoreModel
-from app.schemas.user import UserModel
+from app.schemas.auth import PersonInDB
 from typing import List
 
 
@@ -11,7 +11,7 @@ class WordModel(CoreModel):
     type: str
     translation: str
     explanation: str
-    user: UserModel
+    user: PersonInDB
 
 
 class PhraseModel(CoreModel):
@@ -20,7 +20,7 @@ class PhraseModel(CoreModel):
     suffix: str
     translation: str
     word: WordModel
-    user: UserModel
+    user: PersonInDB
 
 
 class CardInDB(CoreModel):

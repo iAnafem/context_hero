@@ -10,3 +10,5 @@ pytest==6.2.5
 pytest-asyncio==0.14.0
 httpx==0.16.1
 asgi-lifespan==1.0.1
+email-validator==1.2.1
+dnspython==2.2.1
