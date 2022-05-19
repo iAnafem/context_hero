@@ -23,3 +23,10 @@ FETCH_CARDS_LIST = """
     ON w.id = tr.eng_w_id
 """
 
+UPDATE_GRADE = """
+    INSERT INTO :table_name (person_id, word_id, grade)
+    VALUES (:person_id, :word_id, :grade)
+    ON CONFLICT (person_id, word_id) DO UPDATE
+        SET grade  = grade + :grade
+    RETURNING id;
+"""
