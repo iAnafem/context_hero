@@ -2,7 +2,7 @@ from datetime import datetime
 
 from app.schemas.core import CoreModel
 from app.schemas.auth import PersonInDB
-from typing import List
+from typing import List, Optional
 
 
 class WordModel(CoreModel):
@@ -35,6 +35,13 @@ class CardInDB(CoreModel):
     explanation: str
     category: str
     word_translation: List[str]
+
+
+class GradeToUpdate(CoreModel):
+    lang: str
+    word_id: int
+    value: int
+    person_id: Optional[int]
 
 
 class GradeInDB(CoreModel):

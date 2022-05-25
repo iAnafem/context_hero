@@ -11,6 +11,7 @@ export interface ICard {
   prefix: string[];
   suffix: string[];
   answer: string;
+  answer_id: number;
   answerType: string;
   category: string;
   answerExplanation: string;

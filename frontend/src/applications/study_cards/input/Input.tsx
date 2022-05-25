@@ -20,10 +20,12 @@ export default function Input(props: TInput) {
   const isAnswerCorrect = (answer: string) =>
     answer.toLowerCase() === props.store.answer.toLowerCase();
   const handleKeyDown = (key: string) => {
+    let value = 0;
     if (key === "Enter") {
       if (isAnswerCorrect(answer)) {
         setColor("green");
         setAnswer(cardStore.answer);
+        value = 1;
         correctAnswerSpeech.speak({
           text: props.store.getPhrase(),
         } as SpeechSynthesisUtterance);
@@ -34,7 +36,9 @@ export default function Input(props: TInput) {
         setAnswer("");
         setPlaceholder(props.store.answer);
         setTimeout(() => setPlaceholder(""), 2000);
+        value = -1;
       }
+      cardStore.updateGrade(value);
     }
   };
   return (

@@ -7,6 +7,7 @@ export class CardStore implements ICard {
   prefix = ["This", "is", "my", "test", "message."];
   suffix = ["-", "is", "the", "correct", "answer"];
   answer = "ANSWER";
+  answer_id = 1;
   answerType = "noun";
   category = "common";
   answerExplanation = "There will be an answer description ";
@@ -20,6 +21,7 @@ export class CardStore implements ICard {
       prefix: observable,
       suffix: observable,
       answer: observable,
+      answer_id: observable,
       category: observable,
       answerExplanation: observable,
       phraseTranslation: observable,
@@ -47,6 +49,24 @@ export class CardStore implements ICard {
     this.answerExplanation = data.explanation;
     this.category = data.category;
     this.answerTranslation = data.word_translation;
+  }
+
+  updateGrade(value: number) {
+    let headers = { "Content-Type": "application/json" };
+    return fetch("http://localhost:8000/api/cards/update-grade", {
+      method: "PATCH",
+      body: {
+        // @ts-ignore
+        word_id: this.answer_id,
+        lang: "english",
+        value: value,
+      },
+      headers: headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   getPhrase(): string {
