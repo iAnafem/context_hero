@@ -32,6 +32,7 @@ class CardInDB(CoreModel):
     suffix: str
     phrase_translation: str
     word: str
+    word_id: int
     explanation: str
     category: str
     word_translation: List[str]

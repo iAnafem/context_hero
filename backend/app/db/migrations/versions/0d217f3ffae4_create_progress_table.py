@@ -18,14 +18,12 @@ depends_on = None
 
 def get_created_at(custom_name: str = None, indexed: bool = False) -> sa.Column:
     name = "created_at" if custom_name is None else custom_name
-    return (
-        sa.Column(
-            name,
-            sa.TIMESTAMP(timezone=True),
-            server_default=sa.func.now(),
-            nullable=False,
-            index=indexed,
-        ),
+    return sa.Column(
+        name,
+        sa.TIMESTAMP(timezone=True),
+        server_default=sa.func.now(),
+        nullable=False,
+        index=indexed,
     )
 
 

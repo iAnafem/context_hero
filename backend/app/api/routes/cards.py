@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 from fastapi import APIRouter, Depends, Body
 from pydantic import EmailStr
 
@@ -20,18 +20,19 @@ async def fetch_cards_list(
     return [CardInDB(**row) for row in cards_stack]
 
 
-@router.patch(
+@router.post(
     "/update-grade",
-    response_model=CardInDB,
     name="card:update-grade",
 )
 async def update_grade(
+    data: GradeToUpdate,
     cards_repo: CardsRepository = Depends(get_repository(CardsRepository)),
-    grade: GradeToUpdate = Body(..., embed=True),
     auth_repo: AuthRepository = Depends(get_repository(AuthRepository)),
 ) -> None:
     # this is a temporary crutch. Need to add a dependency
     # for getting a person email from an auth token
     person = await auth_repo.get_person_by_email(email=EmailStr("email@example.com"))
-    grade.person_id = person.id
-    return await cards_repo.update_grade(grade=grade)
+    print(person)
+    print(data)
+    data.person_id = person.id
+    return await cards_repo.update_grade(grade=data)

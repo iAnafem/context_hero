@@ -26,6 +26,7 @@ export interface ICardFromDB {
   suffix: string;
   phrase_translation: string;
   word: string;
+  word_id: number;
   explanation: string;
   category: string;
   word_translation: string[];

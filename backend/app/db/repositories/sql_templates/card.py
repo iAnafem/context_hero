@@ -5,6 +5,7 @@ FETCH_CARDS_LIST = """
         , p.suffix      AS suffix
         , p.translation AS phrase_translation
         , w.word        AS word
+        , w.id          AS word_id
         , w.explanation AS explanation
         , c.name        AS category
         , tr.words      AS word_translation
