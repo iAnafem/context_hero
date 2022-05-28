@@ -33,6 +33,7 @@ class CardInDB(CoreModel):
     phrase_translation: str
     word: str
     word_id: int
+    grade: int
     explanation: str
     category: str
     word_translation: List[str]
@@ -41,7 +42,7 @@ class CardInDB(CoreModel):
 class GradeToUpdate(CoreModel):
     lang: str
     word_id: int
-    value: int
+    grade: int
     person_id: Optional[int]
 
 

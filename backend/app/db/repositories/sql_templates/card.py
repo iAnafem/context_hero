@@ -1,17 +1,23 @@
 FETCH_CARDS_LIST = """
-    SELECT p.id         AS id
-        , p.person_id   AS person_id
-        , p.prefix      AS prefix
-        , p.suffix      AS suffix
-        , p.translation AS phrase_translation
-        , w.word        AS word
-        , w.id          AS word_id
-        , w.explanation AS explanation
-        , c.name        AS category
-        , tr.words      AS word_translation
+    SELECT p.id                            AS id
+        , p.person_id                      AS person_id
+        , p.prefix                         AS prefix
+        , p.suffix                         AS suffix
+        , p.translation                    AS phrase_translation
+        , w.word                           AS word
+        , w.id                             AS word_id
+        , CASE 
+            WHEN g.grade is null THEN 0 
+            ELSE g.grade 
+          END                              AS grade
+        , w.explanation                    AS explanation
+        , c.name                           AS category
+        , tr.words                         AS word_translation
     FROM english_phrase AS p
     INNER JOIN english_word AS w
     ON p.word_id = w.id
+    LEFT JOIN english_grade AS g
+    ON (p.person_id = g.person_id AND p.word_id = g.word_id)
     INNER JOIN category AS c
     ON w.category_id = c.id
     INNER JOIN (
@@ -25,9 +31,9 @@ FETCH_CARDS_LIST = """
 """
 
 UPDATE_GRADE = """
-    INSERT INTO :table_name (person_id, word_id, grade)
-    VALUES (:person_id, :word_id, :grade)
+    INSERT INTO {table_name} AS g (person_id, word_id, grade)
+    VALUES ({person_id}, {word_id}, CASE WHEN {grade} = 1 THEN 10 ELSE 1 END)
     ON CONFLICT (person_id, word_id) DO UPDATE
-        SET grade  = grade + :grade
-    RETURNING id;
+        SET grade = g.grade + {grade}
+    RETURNING '{lang}' AS lang, person_id, word_id, grade;
 """

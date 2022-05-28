@@ -12,6 +12,7 @@ export interface ICard {
   suffix: string[];
   answer: string;
   answer_id: number;
+  grade: number;
   answerType: string;
   category: string;
   answerExplanation: string;
@@ -27,6 +28,7 @@ export interface ICardFromDB {
   phrase_translation: string;
   word: string;
   word_id: number;
+  grade: number;
   explanation: string;
   category: string;
   word_translation: string[];
