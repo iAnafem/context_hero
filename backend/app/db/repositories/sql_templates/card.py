@@ -21,12 +21,12 @@ FETCH_CARDS_LIST = """
     INNER JOIN category AS c
     ON w.category_id = c.id
     INNER JOIN (
-    SELECT t.eng_w_id as eng_w_id, array_agg(rus.word) as words
-    FROM translation as t
-    INNER JOIN russian_word as rus
+    SELECT t.eng_w_id AS eng_w_id, array_agg(rus.word) AS words
+    FROM translation AS t
+    INNER JOIN russian_word AS rus
     ON t.rus_w_id = rus.id
-    group by t.eng_w_id
-    ) as tr
+    GROUP BY t.eng_w_id
+    ) AS tr
     ON w.id = tr.eng_w_id
 """
 
@@ -34,6 +34,19 @@ UPDATE_GRADE = """
     INSERT INTO {table_name} AS g (person_id, word_id, grade)
     VALUES ({person_id}, {word_id}, CASE WHEN {grade} = 1 THEN 10 ELSE 1 END)
     ON CONFLICT (person_id, word_id) DO UPDATE
-        SET grade = g.grade + {grade}
+        SET grade = CASE 
+                        WHEN DATE(g.last_attempt) != DATE(NOW())
+                        THEN
+                            CASE 
+                                WHEN g.grade = 1 AND {grade} = -1 
+                                THEN 1 
+                                ELSE CASE
+                                        WHEN g.grade = 10 AND {grade} = 1
+                                        THEN g.grade
+                                        ELSE g.grade + {grade} 
+                                        END
+                                END
+                        ELSE g.grade
+                        END
     RETURNING '{lang}' AS lang, person_id, word_id, grade;
 """
