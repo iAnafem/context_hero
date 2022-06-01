@@ -45,7 +45,10 @@ export default function Input(props: TInput) {
       }
       cardStore.updateGrade(value);
       let currIdx = cardsStackStore.currNum - 1;
-      let idxToInsert = Math.min(getRandomInt(50, currIdx));
+      let minDistance = 10;
+      let idxToInsert = Math.min(
+        getRandomInt(cardsStackStore.items.length, currIdx + minDistance)
+      );
       cardStore.updIncorrectAnswersQty();
       cardStore.incorrectAnswersQty === 1 &&
         cardsStackStore.insert(idxToInsert, cardsStackStore.getCurrent());
