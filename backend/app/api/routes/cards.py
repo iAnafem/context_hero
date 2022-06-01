@@ -15,8 +15,10 @@ router = APIRouter()
 @router.get("/stack")
 async def fetch_cards_list(
     cards_repo: CardsRepository = Depends(get_repository(CardsRepository)),
+    auth_repo: AuthRepository = Depends(get_repository(AuthRepository)),
 ) -> List[CardInDB]:
-    cards_stack = await cards_repo.fetch_cards()
+    person = await auth_repo.get_person_by_email(email=EmailStr("email@example.com"))
+    cards_stack = await cards_repo.fetch_cards(person_id=person.id)
     return [CardInDB(**row) for row in cards_stack]
 
 
@@ -32,7 +34,5 @@ async def update_grade(
     # this is a temporary crutch. Need to add a dependency
     # for getting a person email from an auth token
     person = await auth_repo.get_person_by_email(email=EmailStr("email@example.com"))
-    print(person)
-    print(data)
     data.person_id = person.id
     return await cards_repo.update_grade(grade=data)

@@ -1,3 +1,28 @@
+SELECT_WORDS_TO_REVISE = """
+    WITH to_revise AS (
+        SELECT word_id, grade
+        FROM english_grade
+        WHERE person_id = {person_id}
+        AND DATE(last_attempt) <  DATE(NOW())
+        ORDER BY last_attempt ASC
+    )
+    (SELECT word_id, grade FROM to_revise WHERE grade = 10 LIMIT 5)
+    UNION
+    (SELECT word_id, grade FROM to_revise WHERE grade between 5 AND 9 LIMIT 15)
+    UNION
+    (SELECT word_id, grade FROM to_revise WHERE grade between 1 AND 4 LIMIT 50)
+    LIMIT 50
+"""
+
+SELECT_NEW_WORDS = """
+    SELECT id as word_id, 0 as grade 
+    FROM english_word WHERE id NOT IN (
+        SELECT word_id
+        FROM english_grade
+        WHERE person_id = {person_id}
+    ) 
+"""
+
 FETCH_CARDS_LIST = """
     SELECT p.id                            AS id
         , p.person_id                      AS person_id
@@ -12,12 +37,13 @@ FETCH_CARDS_LIST = """
           END                              AS grade
         , w.explanation                    AS explanation
         , c.name                           AS category
-        , tr.words                         AS word_translation
-    FROM english_phrase AS p
+        , tr.words                         AS word_translation 
+    FROM
+    ({words_to_learn}) AS g
+    INNER JOIN english_phrase AS p
+    ON g.word_id = p.word_id
     INNER JOIN english_word AS w
-    ON p.word_id = w.id
-    LEFT JOIN english_grade AS g
-    ON (p.person_id = g.person_id AND p.word_id = g.word_id)
+    ON w.id = g.word_id
     INNER JOIN category AS c
     ON w.category_id = c.id
     INNER JOIN (
@@ -29,6 +55,7 @@ FETCH_CARDS_LIST = """
     ) AS tr
     ON w.id = tr.eng_w_id
 """
+
 
 UPDATE_GRADE = """
     INSERT INTO {table_name} AS g (person_id, word_id, grade)
