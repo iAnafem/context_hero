@@ -1,5 +1,5 @@
 import { ICardFromDB, ICardsStack } from "../types";
-import { action, makeObservable, observable } from "mobx";
+import { action, autorun, makeObservable, observable } from "mobx";
 
 class CardsStackStore implements ICardsStack {
   items: any[] = [];
@@ -19,7 +19,16 @@ class CardsStackStore implements ICardsStack {
       next: action.bound,
       insert: action.bound,
     });
+    autorun(this.logStoreDetails);
   }
+
+  get storeDetails() {
+    return this.items.length;
+  }
+
+  logStoreDetails = () => {
+    console.log(this.storeDetails);
+  };
 
   private get(idx: number): ICardFromDB {
     return this?.items[idx];

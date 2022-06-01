@@ -18,6 +18,7 @@ export interface ICard {
   answerExplanation: string;
   phraseTranslation: string;
   answerTranslation: string[];
+  incorrectAnswersQty: number;
 }
 
 export interface ICardFromDB {

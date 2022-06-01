@@ -14,6 +14,7 @@ export class CardStore implements ICard {
   answerExplanation = "There will be an answer description ";
   phraseTranslation = "Это моё тестовое сообщение. ОТВЕТ - правильный ответ";
   answerTranslation = ["ОТВЕТ"];
+  incorrectAnswersQty = 0;
 
   constructor() {
     makeObservable(this, {
@@ -28,6 +29,7 @@ export class CardStore implements ICard {
       answerExplanation: observable,
       phraseTranslation: observable,
       answerTranslation: observable,
+      incorrectAnswersQty: observable,
       setCardData: action.bound,
       switchDescriptionType: action.bound,
     });
@@ -53,6 +55,7 @@ export class CardStore implements ICard {
     this.answerExplanation = data.explanation;
     this.category = data.category;
     this.answerTranslation = data.word_translation;
+    this.incorrectAnswersQty = 0;
   }
 
   updateGrade(value: number) {
@@ -72,6 +75,9 @@ export class CardStore implements ICard {
       });
   }
 
+  updIncorrectAnswersQty(): void {
+    this.incorrectAnswersQty = this.incorrectAnswersQty + 1;
+  }
   getPhrase(): string {
     return this.prefix.join(" ") + ` ${this.answer} ` + this.suffix.join(" ");
   }

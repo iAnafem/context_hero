@@ -5,6 +5,11 @@ import { TInput } from "../types";
 import stackStore from "../stores/cardsStackStore";
 // @ts-ignore
 import { useSpeechSynthesis } from "react-speech-kit";
+import cardsStackStore from "../stores/cardsStackStore";
+
+function getRandomInt(max: number, min: number): number {
+  return Math.floor(Math.random() * max) + min;
+}
 
 export default function Input(props: TInput) {
   const [answer, setAnswer] = useState("");
@@ -39,6 +44,11 @@ export default function Input(props: TInput) {
         value = -1;
       }
       cardStore.updateGrade(value);
+      let currIdx = cardsStackStore.currNum - 1;
+      let idxToInsert = Math.min(getRandomInt(50, currIdx));
+      cardStore.updIncorrectAnswersQty();
+      cardStore.incorrectAnswersQty === 1 &&
+        cardsStackStore.insert(idxToInsert, cardsStackStore.getCurrent());
     }
   };
   return (
