@@ -14,11 +14,14 @@ function getRandomInt(max: number, min: number): number {
 export default function Input(props: TInput) {
   const [answer, setAnswer] = useState("");
   const [color, setColor] = useState("grey");
+  let initWidth = (cardStore.answer.length * 24) / 2;
+  const [width, setWidth] = useState(initWidth);
   const [placeholder, setPlaceholder] = useState("");
   const onEnd = () => {
     stackStore.next();
     setAnswer("");
     setColor("grey");
+    setWidth(initWidth / 2);
   };
   const correctAnswerSpeech = useSpeechSynthesis({ onEnd });
   const incorrectAnswerSpeech = useSpeechSynthesis();
@@ -39,8 +42,12 @@ export default function Input(props: TInput) {
           text: props.store.answer,
         } as SpeechSynthesisUtterance);
         setAnswer("");
+        setWidth(initWidth);
         setPlaceholder(props.store.answer);
-        setTimeout(() => setPlaceholder(""), 2000);
+        setTimeout(() => {
+          setPlaceholder("");
+          setWidth(initWidth / 2);
+        }, 2000);
         value = -1;
       }
       cardStore.updateGrade(value);
@@ -52,18 +59,23 @@ export default function Input(props: TInput) {
       cardStore.updIncorrectAnswersQty();
       cardStore.incorrectAnswersQty === 1 &&
         cardsStackStore.insert(idxToInsert, cardsStackStore.getCurrent());
+    } else {
+      if (answer.length * 14 > width) {
+        let value = key === "Backspace" ? -8 : 8;
+        setWidth(width + value);
+      }
     }
   };
   return (
     <input
       autoFocus
-      type={"string"}
-      className={"placeholder"}
+      type={"text"}
+      className={"input"}
       value={answer}
       placeholder={placeholder}
       onChange={(event) => setAnswer(event.target.value)}
       onKeyDown={(event) => handleKeyDown(event.key)}
-      style={{ color: color }}
+      style={{ color: color, width: width }}
     />
   );
 }

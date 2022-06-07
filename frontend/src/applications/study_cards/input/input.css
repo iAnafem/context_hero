@@ -1,4 +1,17 @@
 .input {
+    font-size: 20px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: azure;
+    border: 0;
+    outline: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: lightslategray;
+}
+
+input:focus {
+    outline:none!important;
 }
 
 input::-webkit-input-placeholder { /* WebKit browsers */

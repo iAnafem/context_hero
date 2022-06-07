@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 export const Card = observer(() => {
   return (
     <div className={"card"}>
+      <div>{cardStore.grade === 0 && "New word!"}</div>
       <div className={"phrase"}>
         {cardStore.prefix.map((word: string, idx: number) => (
           <span className={"word"} key={`${word}_${idx}`}>
