@@ -17,6 +17,7 @@ class CardsRepository(BaseRepository):
     async def fetch_cards(self, person_id: int) -> List[Mapping]:
         query_params = {"words_to_learn": SELECT_WORDS_TO_REVISE.format(person_id=person_id)}
         cards_to_revise_query = FETCH_CARDS_LIST.format_map(query_params)
+        logger.warning(cards_to_revise_query)
         cards = await self.db.fetch_all(query=cards_to_revise_query)
         if len(cards) < 50:
             query_params = {"words_to_learn": SELECT_NEW_WORDS.format(person_id=person_id)}
