@@ -12,15 +12,19 @@ function getRandomInt(max: number, min: number): number {
 }
 
 export default function Input(props: TInput) {
+  const initTextColor = "#22596e";
+  const initBGColor = "#edf7f7";
+  const initWidth = Math.ceil(cardStore.answer.length);
   const [answer, setAnswer] = useState("");
-  const [color, setColor] = useState("grey");
-  let initWidth = Math.ceil(cardStore.answer.length);
+  const [textColor, setTextColor] = useState(initTextColor);
+  const [BGColor, setBGColor] = useState(initBGColor);
   const [width, setWidth] = useState(initWidth);
   const [placeholder, setPlaceholder] = useState("");
   const onEnd = () => {
     stackStore.next();
     setAnswer("");
-    setColor("grey");
+    setTextColor(initTextColor);
+    setBGColor(initBGColor);
     setWidth(initWidth / 2);
   };
   const correctAnswerSpeech = useSpeechSynthesis({ onEnd });
@@ -31,7 +35,8 @@ export default function Input(props: TInput) {
     let grade = 0;
     if (key === "Enter") {
       if (isAnswerCorrect(answer)) {
-        setColor("green");
+        setTextColor("rgb(73 120 79)");
+        setBGColor("rgb(232 255 233)");
         setAnswer(cardStore.answer);
         grade = 1;
         correctAnswerSpeech.speak({
@@ -43,10 +48,12 @@ export default function Input(props: TInput) {
         } as SpeechSynthesisUtterance);
         setAnswer("");
         setWidth(initWidth);
+        setBGColor("rgb(255 231 231)");
         setPlaceholder(props.store.answer);
         setTimeout(() => {
           setPlaceholder("");
           setWidth(initWidth / 2);
+          setBGColor(initBGColor);
         }, 2000);
         grade = -1;
       }
@@ -76,7 +83,8 @@ export default function Input(props: TInput) {
       onChange={(event) => setAnswer(event.target.value)}
       onKeyDown={(event) => handleKeyDown(event.key)}
       style={{
-        color: color,
+        color: textColor,
+        backgroundColor: BGColor,
         width: width * 11,
         minWidth: (initWidth / 2) * 11,
       }}
