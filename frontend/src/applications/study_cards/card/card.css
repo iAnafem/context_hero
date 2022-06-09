@@ -11,14 +11,6 @@
   flex-direction: row;
 }
 
-.progressPanel {
-  width: 20px;
-  position: relative;
-  display: block;
-  top: 0;
-  left: -30px;
-}
-
 .word {
   display: inline-block;
   font-size: 24px;
