@@ -14,7 +14,7 @@ function getRandomInt(max: number, min: number): number {
 export default function Input(props: TInput) {
   const [answer, setAnswer] = useState("");
   const [color, setColor] = useState("grey");
-  let initWidth = (cardStore.answer.length * 24) / 2;
+  let initWidth = Math.ceil(cardStore.answer.length);
   const [width, setWidth] = useState(initWidth);
   const [placeholder, setPlaceholder] = useState("");
   const onEnd = () => {
@@ -28,12 +28,12 @@ export default function Input(props: TInput) {
   const isAnswerCorrect = (answer: string) =>
     answer.toLowerCase() === props.store.answer.toLowerCase();
   const handleKeyDown = (key: string) => {
-    let value = 0;
+    let grade = 0;
     if (key === "Enter") {
       if (isAnswerCorrect(answer)) {
         setColor("green");
         setAnswer(cardStore.answer);
-        value = 1;
+        grade = 1;
         correctAnswerSpeech.speak({
           text: props.store.getPhrase(),
         } as SpeechSynthesisUtterance);
@@ -48,9 +48,9 @@ export default function Input(props: TInput) {
           setPlaceholder("");
           setWidth(initWidth / 2);
         }, 2000);
-        value = -1;
+        grade = -1;
       }
-      cardStore.updateGrade(value);
+      cardStore.updateGrade(grade);
       let currIdx = cardsStackStore.currNum - 1;
       let minDistance = 10;
       let idxToInsert = Math.min(
@@ -60,8 +60,8 @@ export default function Input(props: TInput) {
       cardStore.incorrectAnswersQty === 1 &&
         cardsStackStore.insert(idxToInsert, cardsStackStore.getCurrent());
     } else {
-      if (answer.length * 14 > width) {
-        let value = key === "Backspace" ? -8 : 8;
+      if (answer.length >= width) {
+        let value = key === "Backspace" && width > 0 ? -1 : 1;
         setWidth(width + value);
       }
     }
@@ -75,7 +75,11 @@ export default function Input(props: TInput) {
       placeholder={placeholder}
       onChange={(event) => setAnswer(event.target.value)}
       onKeyDown={(event) => handleKeyDown(event.key)}
-      style={{ color: color, width: width }}
+      style={{
+        color: color,
+        width: width * 11,
+        minWidth: (initWidth / 2) * 11,
+      }}
     />
   );
 }
