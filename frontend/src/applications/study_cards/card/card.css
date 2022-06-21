@@ -4,7 +4,14 @@
   width: 30%;
   border-radius: 10px;
   margin: 50px auto auto;
-  padding: 14px 14px 14px 14px
+  padding: 14px 14px 14px 14px;
+  position: relative;
+}
+
+
+.bodyWrap {
+  display: flex;
+  flex-direction: row;
 }
 
 .phrase {

@@ -1,7 +1,11 @@
 .gradeBar {
-  width: 20px;
-  position: relative;
-  display: block;
-  top: 0;
-  left: -30px;
+    display: block;
+    width: 20px;
+}
+
+.grade {
+    height: 6px;
+    width: 16px;
+    margin: 2px;
+    border-radius: 1px;
 }
