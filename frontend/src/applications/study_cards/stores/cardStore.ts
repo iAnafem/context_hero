@@ -71,7 +71,7 @@ export class CardStore implements ICard {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        this.incrementGrade(value);
       });
   }
 
@@ -80,6 +80,10 @@ export class CardStore implements ICard {
   }
   getPhrase(): string {
     return this.prefix.join(" ") + ` ${this.answer} ` + this.suffix.join(" ");
+  }
+
+  incrementGrade(value: number): void {
+    this.grade += value;
   }
 
   switchDescriptionType(): void {
