@@ -1,6 +1,7 @@
 .gradeBar {
     display: block;
     width: 20px;
+    padding-right: 6px;
 }
 
 .grade {

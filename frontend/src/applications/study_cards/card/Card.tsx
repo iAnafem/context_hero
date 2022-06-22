@@ -6,6 +6,8 @@ import Input from "../input/Input";
 import { observer } from "mobx-react";
 import { GradeBar } from "../grade_bar/GradeBar";
 import StateCheckbox from "../../../lib/components/state_checkbox";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVolumeMute, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 
 export const Card = observer(() => {
   return (
@@ -35,8 +37,8 @@ export const Card = observer(() => {
           <StateCheckbox
             handleClick={console.log}
             icons={{
-              1: "unmute",
-              0: "mute",
+              1: <FontAwesomeIcon icon={faVolumeHigh} />,
+              0: <FontAwesomeIcon icon={faVolumeMute} />,
             }}
           />
         </div>
