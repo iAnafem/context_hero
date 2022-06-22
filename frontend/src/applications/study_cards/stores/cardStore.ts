@@ -72,6 +72,7 @@ export class CardStore implements ICard {
       .then((response) => response.json())
       .then((data) => {
         this.incrementGrade(value);
+        this.updIncorrectAnswersQty();
       });
   }
 
@@ -83,7 +84,9 @@ export class CardStore implements ICard {
   }
 
   incrementGrade(value: number): void {
-    this.grade += value;
+    if (this.incorrectAnswersQty === 0) {
+      this.grade += value;
+    }
   }
 
   switchDescriptionType(): void {

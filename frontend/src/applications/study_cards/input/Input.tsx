@@ -32,13 +32,12 @@ export default function Input(props: TInput) {
   const isAnswerCorrect = (answer: string) =>
     answer.toLowerCase() === props.store.answer.toLowerCase();
   const handleKeyDown = (key: string) => {
-    let grade = 0;
     if (key === "Enter") {
       if (isAnswerCorrect(answer)) {
         setTextColor("rgb(73 120 79)");
         setBGColor("rgb(232 255 233)");
         setAnswer(cardStore.answer);
-        grade = 1;
+        cardStore.updateGrade(1);
         correctAnswerSpeech.speak({
           text: props.store.getPhrase(),
         } as SpeechSynthesisUtterance);
@@ -50,20 +49,18 @@ export default function Input(props: TInput) {
         setWidth(initWidth);
         setBGColor("rgb(255 231 231)");
         setPlaceholder(props.store.answer);
+        cardStore.updateGrade(-1);
         setTimeout(() => {
           setPlaceholder("");
           setWidth(initWidth / 2);
           setBGColor(initBGColor);
         }, 2000);
-        grade = -1;
       }
-      cardStore.updateGrade(grade);
       let currIdx = cardsStackStore.currNum - 1;
       let minDistance = 10;
       let idxToInsert = Math.min(
         getRandomInt(cardsStackStore.items.length, currIdx + minDistance)
       );
-      cardStore.updIncorrectAnswersQty();
       cardStore.incorrectAnswersQty === 1 &&
         cardsStackStore.insert(idxToInsert, cardsStackStore.getCurrent());
     } else {
