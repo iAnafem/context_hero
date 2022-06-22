@@ -1,4 +1,4 @@
-import React, { EffectCallback, useEffect, useState } from "react";
+import React from "react";
 import "./card.css";
 import cardStore from "../stores/cardStore";
 import Switcher from "../../../lib/components/switcher/switcher";
@@ -34,7 +34,10 @@ export const Card = observer(() => {
         <div className={"soundButton"}>
           <StateCheckbox
             handleClick={console.log}
-            icons={{ 1: "dssdf", 0: "2dfsdf" }}
+            icons={{
+              1: "unmute",
+              0: "mute",
+            }}
           />
         </div>
       </div>
