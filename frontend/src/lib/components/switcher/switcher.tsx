@@ -1,5 +1,5 @@
 import React from "react";
-import "./switcher.css";
+import "./index.css";
 
 type TSwitcher = {
   handleChange(): void;

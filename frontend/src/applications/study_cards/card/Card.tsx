@@ -1,10 +1,11 @@
 import React, { EffectCallback, useEffect, useState } from "react";
 import "./card.css";
 import cardStore from "../stores/cardStore";
-import Switcher from "../../../lib/components/switcher/Switcher";
+import Switcher from "../../../lib/components/switcher/switcher";
 import Input from "../input/Input";
 import { observer } from "mobx-react";
 import { GradeBar } from "../grade_bar/GradeBar";
+import StateCheckbox from "../../../lib/components/state_checkbox";
 
 export const Card = observer(() => {
   return (
@@ -30,23 +31,35 @@ export const Card = observer(() => {
       </div>
       <div className={"typePanel"}>
         <div className={"answerType"}>{cardStore.answerType}</div>
-        <div className={"typeSwitcher"}>
-          <Switcher handleChange={cardStore.switchDescriptionType} />
+        <div className={"soundButton"}>
+          <StateCheckbox
+            handleClick={console.log}
+            icons={{ 1: "dssdf", 0: "2dfsdf" }}
+          />
         </div>
       </div>
-      <div className={"description"}>
-        {cardStore.descriptionType === 1 ? (
-          <div>
-            <div className={"ansTranslation"}>
-              {cardStore.answerTranslation.join(", ")}
+      <div className={"cardFooter"}>
+        <div>
+          {cardStore.descriptionType === 1 ? (
+            <div>
+              <div className={"ansTranslation"}>
+                {cardStore.answerTranslation.join(", ")}
+              </div>
+              <div className={"phraseTranslation"}>
+                {cardStore.phraseTranslation}
+              </div>
             </div>
-            <div className={"phraseTranslation"}>
-              {cardStore.phraseTranslation}
+          ) : (
+            <div className={"ansExplanation"}>
+              {cardStore.answerExplanation}
             </div>
+          )}
+        </div>
+        <div className={"typeSwitcherContainer"}>
+          <div className={"typeSwitcher"}>
+            <Switcher handleChange={cardStore.switchDescriptionType} />
           </div>
-        ) : (
-          <div className={"ansExplanation"}>{cardStore.answerExplanation}</div>
-        )}
+        </div>
       </div>
     </div>
   );
