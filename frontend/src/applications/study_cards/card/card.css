@@ -1,74 +1,86 @@
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
-  transition: 0.3s;
-  width: 30%;
-  border-radius: 10px;
-  margin: 50px auto auto;
-  padding: 14px 14px 14px 14px;
-  position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    width: 30%;
+    border-radius: 10px;
+    margin: 50px auto auto;
+    padding: 14px 14px 14px 14px;
+    position: relative;
 }
 
 
 .bodyWrap {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
+}
+
+.cardHeader {
+    font-size: 14px;
+    color: #e9ad00;
+    min-height: 16px;
 }
 
 .phrase {
-  flex-direction: row;
+    flex-direction: row;
+    padding-right: 10px;
 }
 
 .word {
-  display: inline-block;
-  font-size: 24px;
-  color: #22596e;
-  padding: 4px 8px 4px 0;
+    display: inline-block;
+    font-size: 24px;
+    color: #22596e;
+    padding: 4px 8px 4px 0;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .description {
-  border-top: 1px solid grey;
-  padding-top: 10px;
-  margin-top: 30px;
+    border-top: 1px solid grey;
+    padding-top: 10px;
+    margin-top: 15px;
 }
 
 .typePanel {
-  padding-top: 10px;
-  position: relative;
-  display: block;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 .answerType {
-  position: absolute;
-  left: 0;
+    color: #272628;
+    font-style: oblique;
 }
+
 .typeSwitcher {
-  position: absolute;
-  right: 0;
+    margin-right: 0;
 }
 
 .ansTranslation {
-  min-height: 30px;
-  font-size: 20px;
-  font-weight: 550;
-  padding-top: 4px;
-  padding-bottom: 4px;
+    min-height: 30px;
+    font-size: 20px;
+    font-style: oblique;
+    color: #272628;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .ansExplanation {
-  min-height: 30px;
-  font-size: 16px;
-  font-style: oblique;
-  padding-top: 4px;
-  padding-bottom: 4px;
+    min-height: 30px;
+    font-size: 16px;
+    color: #272628;
+    font-style: oblique;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .phraseTranslation {
-  font-size: 14px;
-  font-style: oblique;
-  padding-top: 4px;
-  padding-bottom: 4px;
+    font-size: 14px;
+    font-style: oblique;
+    color: #272628;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }

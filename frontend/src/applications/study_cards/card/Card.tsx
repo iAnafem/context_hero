@@ -9,7 +9,7 @@ import { GradeBar } from "../grade_bar/GradeBar";
 export const Card = observer(() => {
   return (
     <div className={"card"}>
-      <div>{cardStore.grade === 0 && "New word!"}</div>
+      <div className={"cardHeader"}>{cardStore.grade === 0 && "New word!"}</div>
       <div className={"bodyWrap"}>
         <div className={"phrase"}>
           {cardStore.prefix.map((word: string, idx: number) => (
@@ -29,20 +29,24 @@ export const Card = observer(() => {
         </div>
       </div>
       <div className={"typePanel"}>
-        <span className={"answerType"}>{cardStore.answerType}</span>
-        <span className={"typeSwitcher"}>
+        <div className={"answerType"}>{cardStore.answerType}</div>
+        <div className={"typeSwitcher"}>
           <Switcher handleChange={cardStore.switchDescriptionType} />
-        </span>
+        </div>
       </div>
       <div className={"description"}>
         {cardStore.descriptionType === 1 ? (
-          <div className={"ansTranslation"}>
-            {cardStore.answerTranslation.join(", ")}
+          <div>
+            <div className={"ansTranslation"}>
+              {cardStore.answerTranslation.join(", ")}
+            </div>
+            <div className={"phraseTranslation"}>
+              {cardStore.phraseTranslation}
+            </div>
           </div>
         ) : (
           <div className={"ansExplanation"}>{cardStore.answerExplanation}</div>
         )}
-        <div className={"phraseTranslation"}>{cardStore.phraseTranslation}</div>
       </div>
     </div>
   );
