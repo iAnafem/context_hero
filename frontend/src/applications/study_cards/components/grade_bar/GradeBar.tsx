@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import "./gradeBar.css";
-import { ICard } from "../types";
+import { ICard } from "../../types";
 
 const gradeColors: { [key: number]: string } = {
   1: "#dd776e",

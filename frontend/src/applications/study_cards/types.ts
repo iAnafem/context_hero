@@ -1,9 +1,6 @@
 import { CardStore } from "./stores/cardStore";
 // @ts-ignore
 import { useSpeechSynthesis } from "react-speech-kit";
-import store from "./stores/cardStore";
-import Switcher from "../../lib/components/switcher/switcher";
-import Input from "./input/Input";
 
 export interface ICard {
   id: number;

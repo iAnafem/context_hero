@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./input.css";
-import cardStore from "../stores/cardStore";
-import { TInput } from "../types";
-import stackStore from "../stores/cardsStackStore";
+import cardStore from "../../stores/cardStore";
+import { TInput } from "../../types";
+import stackStore from "../../stores/cardsStackStore";
 // @ts-ignore
 import { useSpeechSynthesis } from "react-speech-kit";
-import cardsStackStore from "../stores/cardsStackStore";
+import cardsStackStore from "../../stores/cardsStackStore";
 
 function getRandomInt(max: number, min: number): number {
   return Math.floor(Math.random() * max) + min;

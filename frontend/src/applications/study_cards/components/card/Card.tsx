@@ -1,14 +1,14 @@
 import React from "react";
 import "./card.css";
-import cardStore from "../stores/cardStore";
-import Switcher from "../../../lib/components/switcher/switcher";
+import cardStore from "../../stores/cardStore";
+import Switcher from "../../../../lib/components/switcher/switcher";
 import Input from "../input/Input";
 import { observer } from "mobx-react";
 import { GradeBar } from "../grade_bar/GradeBar";
-import StateCheckbox from "../../../lib/components/state_checkbox";
+import StateCheckbox from "../../../../lib/components/state_checkbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeMute, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
-import cardsStackStore from "../stores/cardsStackStore";
+import cardsStackStore from "../../stores/cardsStackStore";
 
 export const Card = observer(() => {
   return (
