@@ -40,6 +40,7 @@ export interface ICardsStack {
   currNum: number;
   isLoading: boolean;
   isLoaded: boolean;
+  withSound: boolean;
 }
 
 export enum DescriptionType {

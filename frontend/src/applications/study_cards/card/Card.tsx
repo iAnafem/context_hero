@@ -8,6 +8,7 @@ import { GradeBar } from "../grade_bar/GradeBar";
 import StateCheckbox from "../../../lib/components/state_checkbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeMute, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
+import cardsStackStore from "../stores/cardsStackStore";
 
 export const Card = observer(() => {
   return (
@@ -35,7 +36,7 @@ export const Card = observer(() => {
         <div className={"answerType"}>{cardStore.answerType}</div>
         <div className={"soundButton"}>
           <StateCheckbox
-            handleClick={console.log}
+            toggleSound={cardsStackStore.toggleSound}
             icons={{
               1: <FontAwesomeIcon icon={faVolumeHigh} />,
               0: <FontAwesomeIcon icon={faVolumeMute} />,

@@ -6,6 +6,7 @@ class CardsStackStore implements ICardsStack {
   currNum = 1;
   isLoaded = false;
   isLoading = true;
+  withSound = true;
 
   constructor() {
     makeObservable(this, {
@@ -13,6 +14,8 @@ class CardsStackStore implements ICardsStack {
       currNum: observable,
       isLoaded: observable,
       isLoading: observable,
+      withSound: observable,
+      toggleSound: action.bound,
       setItems: action.bound,
       fetch: action.bound,
       getCurrent: action.bound,
@@ -32,6 +35,10 @@ class CardsStackStore implements ICardsStack {
 
   private get(idx: number): ICardFromDB {
     return this?.items[idx];
+  }
+
+  toggleSound(value: number): void {
+    this.withSound = value == 1;
   }
 
   getCurrent(): ICardFromDB {

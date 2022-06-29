@@ -38,13 +38,18 @@ export default function Input(props: TInput) {
         setBGColor("rgb(232 255 233)");
         setAnswer(cardStore.answer);
         cardStore.updateGrade(1);
-        correctAnswerSpeech.speak({
-          text: props.store.getPhrase(),
-        } as SpeechSynthesisUtterance);
+        cardsStackStore.withSound
+          ? correctAnswerSpeech.speak({
+              text: props.store.getPhrase(),
+            } as SpeechSynthesisUtterance)
+          : setTimeout(() => {
+              onEnd();
+            }, 1500);
       } else {
-        incorrectAnswerSpeech.speak({
-          text: props.store.answer,
-        } as SpeechSynthesisUtterance);
+        cardsStackStore.withSound &&
+          incorrectAnswerSpeech.speak({
+            text: props.store.answer,
+          } as SpeechSynthesisUtterance);
         setAnswer("");
         setWidth(initWidth);
         setBGColor("rgb(255 231 231)");
