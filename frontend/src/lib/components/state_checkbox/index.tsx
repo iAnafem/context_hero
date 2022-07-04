@@ -6,7 +6,7 @@ interface IIconButton {
   icons: { [key: number]: ReactElement };
 }
 
-export default function StateCheckbox(props: IIconButton) {
+const StateCheckbox = (props: IIconButton) => {
   const [isChecked, check] = useState(1);
   const handleClick = () => {
     const value = isChecked === 1 ? 0 : 1;
@@ -20,4 +20,6 @@ export default function StateCheckbox(props: IIconButton) {
       </button>
     </div>
   );
-}
+};
+
+export default StateCheckbox;

@@ -1,0 +1,8 @@
+.phraseContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.phraseItem {
+        display: inline-block;
+}

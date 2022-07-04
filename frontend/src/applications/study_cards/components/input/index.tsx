@@ -11,7 +11,7 @@ function getRandomInt(max: number, min: number): number {
   return Math.floor(Math.random() * max) + min;
 }
 
-export default function Input(props: TInput) {
+const Input = (props: TInput) => {
   const initTextColor = "#22596e";
   const initBGColor = "#edf7f7";
   const initWidth = Math.ceil(cardStore.answer.length);
@@ -92,4 +92,6 @@ export default function Input(props: TInput) {
       }}
     />
   );
-}
+};
+
+export default Input;

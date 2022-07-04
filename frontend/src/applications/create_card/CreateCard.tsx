@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 import ccStore from "./stores/createCardStore";
 import { IPhraseToCreate } from "./types";
+import PhraseView from "./components/phrase_view";
 
 const CreateCard = observer(() => {
   const [phrase, setPhrase] = useState("");
@@ -21,7 +22,7 @@ const CreateCard = observer(() => {
         value={phrase}
       />
       {ccStore.phrases.map((item: IPhraseToCreate, idx: number) => (
-        <div key={`phrase_${idx}`}>{item.phrase}</div>
+        <PhraseView item={item} idx={idx} key={`phrase_${idx}`} />
       ))}
     </div>
   );
