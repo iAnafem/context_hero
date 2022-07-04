@@ -1,37 +1,42 @@
-import { ICreateCard } from "../types";
+import { ICreateCard, IPhraseToCreate } from "../types";
 import { action, autorun, makeObservable, observable } from "mobx";
 
 class CreateCardStore implements ICreateCard {
-  phrase: string = "";
-  wordsToLearn: number[] = [];
+  phrases: IPhraseToCreate[] = [];
 
   constructor() {
     makeObservable(this, {
-      phrase: observable,
-      wordsToLearn: observable,
-      setPhrase: action.bound,
-      addWord: action.bound,
+      phrases: observable,
+      insertPhrase: action.bound,
+      // addWord: action.bound,
     });
     autorun(this.logStoreDetails);
   }
   get storeDetails() {
-    return this.wordsToLearn;
+    return this.phrases;
   }
   logStoreDetails = () => {
     console.log(this.storeDetails);
   };
 
-  setPhrase(phrase: string): void {
-    this.phrase = phrase;
+  insertPhrase(phrase: string, idx?: number): void {
+    const phraseToCreate = { phrase: phrase, wordsToLearn: [] };
+    !idx
+      ? this.phrases.push(phraseToCreate)
+      : this.phrases.splice(idx, 0, phraseToCreate);
   }
 
-  addWord(idx: number): void {
-    if (idx in this.wordsToLearn) {
-      this.wordsToLearn.splice(this.wordsToLearn.indexOf(idx), 1);
-    } else {
-      this.wordsToLearn.push(idx);
-    }
+  removePhrase(idx: number): void {
+    this.phrases.splice(idx, 1);
   }
+
+  // addWord(idx: number): void {
+  //   if (idx in this.wordsToLearn) {
+  //     this.wordsToLearn.splice(this.wordsToLearn.indexOf(idx), 1);
+  //   } else {
+  //     this.wordsToLearn.push(idx);
+  //   }
+  // }
 }
 
 const instance = new CreateCardStore();
