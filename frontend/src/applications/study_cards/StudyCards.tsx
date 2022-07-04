@@ -1,7 +1,7 @@
 import React, { EffectCallback, useEffect } from "react";
 import stackStore from "./stores/cardsStackStore";
 import cardStore from "./stores/cardStore";
-import { Card } from "./components/card/Card";
+import Card from "./components/card";
 import { observer } from "mobx-react";
 
 export const StudyCards = observer(() => {

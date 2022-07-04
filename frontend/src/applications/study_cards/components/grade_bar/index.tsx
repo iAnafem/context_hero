@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
-import "./gradeBar.css";
+import "./index.css";
 import { ICard } from "../../types";
 
 const gradeColors: { [key: number]: string } = {
@@ -16,7 +16,7 @@ const gradeColors: { [key: number]: string } = {
   10: "#57bb8a",
 };
 
-export const GradeBar = observer((props: { cardStore: ICard }) => {
+const GradeBar = observer((props: { cardStore: ICard }) => {
   const grade = Number(props.cardStore.grade);
   const emptyStripeColor = "rgb(247 241 241)";
   return (
@@ -38,3 +38,5 @@ export const GradeBar = observer((props: { cardStore: ICard }) => {
     </div>
   );
 });
+
+export default GradeBar;

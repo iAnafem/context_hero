@@ -1,16 +1,16 @@
 import React from "react";
-import "./card.css";
+import "./index.css";
 import cardStore from "../../stores/cardStore";
 import Switcher from "../../../../lib/components/switcher/switcher";
-import Input from "../input/Input";
+import Input from "../input";
 import { observer } from "mobx-react";
-import { GradeBar } from "../grade_bar/GradeBar";
+import GradeBar from "../grade_bar";
 import StateCheckbox from "../../../../lib/components/state_checkbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeMute, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import cardsStackStore from "../../stores/cardsStackStore";
 
-export const Card = observer(() => {
+const Card = observer(() => {
   return (
     <div className={"card"}>
       <div className={"cardHeader"}>{cardStore.grade === 0 && "New word!"}</div>
@@ -70,3 +70,5 @@ export const Card = observer(() => {
     </div>
   );
 });
+
+export default Card;

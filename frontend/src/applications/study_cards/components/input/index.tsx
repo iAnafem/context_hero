@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./input.css";
+import "./index.css";
 import cardStore from "../../stores/cardStore";
 import { TInput } from "../../types";
 import stackStore from "../../stores/cardsStackStore";
