@@ -16,14 +16,15 @@ class CreateCardStore implements ICreateCard {
     return this.phrases;
   }
   logStoreDetails = () => {
-    console.log(this.storeDetails);
+    console.log("Print phrases");
+    this.storeDetails.map((item: IPhraseToCreate) => console.log(item.phrase));
   };
 
   insertPhrase(phrase: string, idx?: number): void {
     const phraseToCreate = { phrase: phrase, wordsToLearn: [] };
-    !idx
+    idx === undefined
       ? this.phrases.push(phraseToCreate)
-      : this.phrases.splice(idx, 0, phraseToCreate);
+      : this.phrases.splice(idx, 1, phraseToCreate);
   }
 
   removePhrase(idx: number): void {

@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import ccStore from "./stores/createCardStore";
 import { IPhraseToCreate } from "./types";
 import PhraseView from "./components/phrase_view";
+import PhraseInput from "./components/phrase_input";
 
 const CreateCard = observer(() => {
   const [phrase, setPhrase] = useState("");
@@ -14,13 +15,10 @@ const CreateCard = observer(() => {
       setPhrase("");
     }
   };
+
   return (
     <div>
-      <input
-        onKeyDown={(event) => handleKeyDown(event.key)}
-        onChange={(event) => setPhrase(event.target.value)}
-        value={phrase}
-      />
+      <PhraseInput />
       {ccStore.phrases.map((item: IPhraseToCreate, idx: number) => (
         <PhraseView item={item} idx={idx} key={`phrase_${idx}`} />
       ))}
