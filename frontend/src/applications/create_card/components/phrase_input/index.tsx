@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import ccStore from "../../stores/createCardStore";
+import "./index.css";
 
 interface IPhraseInput {
   initPhrase?: string;
   idx?: number;
+  className?: string;
 }
 
 const PhraseInput = observer((props: IPhraseInput) => {
@@ -22,9 +24,11 @@ const PhraseInput = observer((props: IPhraseInput) => {
 
   return (
     <input
+      className={props.className || "baseInput"}
       onKeyDown={(event) => handleKeyDown(event.key)}
       onChange={(event) => setPhrase(event.target.value)}
       value={phrase}
+      autoFocus={true}
     />
   );
 });

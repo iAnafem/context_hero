@@ -22,18 +22,24 @@ const PhraseView = observer((props: IPhraseView) => {
 
   return (
     <div className={"phraseContainer"}>
-      {editIdx === props.idx ? (
-        <PhraseInput
-          initPhrase={ccStore.phrases[props.idx].phrase}
-          idx={props.idx}
-        />
-      ) : (
-        <div className={"phraseItem"}>{props.item.phrase}</div>
-      )}
       <IconButton
         icon={<FontAwesomeIcon icon={faEdit} />}
         clickHandler={() => setEditIdx(props.idx)}
       />
+      <div className={"storedPhrase"}>
+        {editIdx === props.idx ? (
+          <PhraseInput
+            initPhrase={ccStore.phrases[props.idx].phrase}
+            idx={props.idx}
+          />
+        ) : (
+          props.item.phrase.split(" ").map((word: string, idx: number) => (
+            <div key={`${idx}_${word}`} className={"phraseWord"}>
+              {word}&nbsp;
+            </div>
+          ))
+        )}
+      </div>
       <IconButton
         icon={<FontAwesomeIcon icon={faTrash} />}
         clickHandler={() => ccStore.removePhrase(props.idx)}

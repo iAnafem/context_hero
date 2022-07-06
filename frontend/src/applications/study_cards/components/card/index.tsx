@@ -18,13 +18,13 @@ const Card = observer(() => {
         <div className={"phrase"}>
           {cardStore.prefix.map((word: string, idx: number) => (
             <span className={"word"} key={`${word}_${idx}`}>
-              {word}
+              {word}&nbsp;
             </span>
           ))}
           <Input store={cardStore} />
           {cardStore.suffix.map((word: string, idx: number) => (
             <span className={"word"} key={`${word}_${idx}`}>
-              {word}
+              {word}&nbsp;
             </span>
           ))}
         </div>

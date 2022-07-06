@@ -1,8 +1,24 @@
 .phraseContainer {
     display: flex;
     flex-direction: row;
+    margin: 10px;
+}
+
+.storedPhrase {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    color: #22596e;
 }
 
 .phraseItem {
         display: inline-block;
+}
+
+.phraseWord {
+    cursor: pointer;
 }
