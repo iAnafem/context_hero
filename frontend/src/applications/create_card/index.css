@@ -3,3 +3,9 @@
     max-width: 95%;
     margin: auto;
 }
+
+.phraseInput {
+    width: 90%;
+    display: flex;
+    margin: auto;
+}

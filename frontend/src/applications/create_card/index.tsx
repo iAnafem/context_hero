@@ -9,7 +9,9 @@ import "./index.css";
 const CreateCard = observer(() => {
   return (
     <div className={"root"}>
-      <PhraseInput />
+      <div className={"phraseInput"}>
+        <PhraseInput />
+      </div>
       {ccStore.phrases.map((item: IPhraseToCreate, idx: number) => (
         <PhraseView item={item} idx={idx} key={`phrase_${idx}`} />
       ))}

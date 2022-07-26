@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import IconButton from "../../../../lib/components/icon_button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faEdit,
+  faCheck,
+  faSquareCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import ccStore from "../../stores/createCardStore";
 import { IPhraseToCreate } from "../../types";
 import { observer } from "mobx-react";
@@ -22,26 +27,41 @@ const PhraseView = observer((props: IPhraseView) => {
 
   return (
     <div className={"phraseContainer"}>
-      <IconButton
-        icon={<FontAwesomeIcon icon={faEdit} />}
-        clickHandler={() => setEditIdx(props.idx)}
-      />
-      <div className={"storedPhrase"}>
-        {editIdx === props.idx ? (
+      {editIdx === props.idx ? (
+        <IconButton
+          icon={
+            <FontAwesomeIcon
+              icon={faSquareCheck}
+              size={"lg"}
+              color={"#57bb8a"}
+            />
+          }
+          clickHandler={() => setEditIdx(props.idx)}
+        />
+      ) : (
+        <IconButton
+          icon={<FontAwesomeIcon icon={faEdit} size={"lg"} color={"#22596e"} />}
+          clickHandler={() => setEditIdx(props.idx)}
+        />
+      )}
+      {editIdx === props.idx ? (
+        <div className={"editPhrase"}>
           <PhraseInput
             initPhrase={ccStore.phrases[props.idx].phrase}
             idx={props.idx}
           />
-        ) : (
-          props.item.phrase.split(" ").map((word: string, idx: number) => (
+        </div>
+      ) : (
+        <div className={"storedPhrase"}>
+          {props.item.phrase.split(" ").map((word: string, idx: number) => (
             <div key={`${idx}_${word}`} className={"phraseWord"}>
               {word}&nbsp;
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
       <IconButton
-        icon={<FontAwesomeIcon icon={faTrash} />}
+        icon={<FontAwesomeIcon icon={faTrash} size={"lg"} color={"#dd776e"} />}
         clickHandler={() => ccStore.removePhrase(props.idx)}
       />
     </div>

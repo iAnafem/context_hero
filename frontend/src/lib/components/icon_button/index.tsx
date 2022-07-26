@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import "./index.css";
 
 interface IIconButton {
   icon: ReactElement;

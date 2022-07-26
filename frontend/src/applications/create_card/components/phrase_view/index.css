@@ -1,18 +1,27 @@
 .phraseContainer {
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .storedPhrase {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 88%;
+    margin: auto;
     padding: 8px;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid grey;
     color: #22596e;
+}
+
+.editPhrase {
+    width: 90%;
+    display: flex;
+    margin: auto;
 }
 
 .phraseItem {
