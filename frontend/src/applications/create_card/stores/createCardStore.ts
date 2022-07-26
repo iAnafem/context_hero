@@ -8,16 +8,19 @@ class CreateCardStore implements ICreateCard {
     makeObservable(this, {
       phrases: observable,
       insertPhrase: action.bound,
-      // addWord: action.bound,
+      addWord: action.bound,
     });
     autorun(this.logStoreDetails);
   }
   get storeDetails() {
     return this.phrases;
   }
+
   logStoreDetails = () => {
     console.log("Print phrases");
-    this.storeDetails.map((item: IPhraseToCreate) => console.log(item.phrase));
+    this.storeDetails.map((item: IPhraseToCreate) =>
+      console.log(item.phrase, item.wordsToLearn)
+    );
   };
 
   insertPhrase(phrase: string, idx?: number): void {
@@ -31,13 +34,15 @@ class CreateCardStore implements ICreateCard {
     this.phrases.splice(idx, 1);
   }
 
-  // addWord(idx: number): void {
-  //   if (idx in this.wordsToLearn) {
-  //     this.wordsToLearn.splice(this.wordsToLearn.indexOf(idx), 1);
-  //   } else {
-  //     this.wordsToLearn.push(idx);
-  //   }
-  // }
+  addWord(phraseIdx: number, wordIdx: number): void {
+    let currentWords = this.phrases[phraseIdx].wordsToLearn;
+    if (wordIdx in currentWords) {
+      currentWords.splice(currentWords.indexOf(wordIdx), 1);
+    } else {
+      currentWords.push(wordIdx);
+    }
+    this.phrases[phraseIdx].wordsToLearn = currentWords;
+  }
 }
 
 const instance = new CreateCardStore();

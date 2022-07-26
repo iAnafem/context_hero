@@ -36,7 +36,7 @@ const PhraseView = observer((props: IPhraseView) => {
               color={"#57bb8a"}
             />
           }
-          clickHandler={() => setEditIdx(props.idx)}
+          clickHandler={() => setEditIdx(-1)}
         />
       ) : (
         <IconButton
@@ -54,14 +54,19 @@ const PhraseView = observer((props: IPhraseView) => {
       ) : (
         <div className={"storedPhrase"}>
           {props.item.phrase.split(" ").map((word: string, idx: number) => (
-            <div key={`${idx}_${word}`} className={"phraseWord"}>
+            <div
+              key={`${idx}_${word}`}
+              className={"phraseWord"}
+              onClick={() => ccStore.addWord(props.idx, idx)}
+              onMouseEnter={() => console.log("hover")}
+            >
               {word}&nbsp;
             </div>
           ))}
         </div>
       )}
       <IconButton
-        icon={<FontAwesomeIcon icon={faTrash} size={"lg"} color={"#dd776e"} />}
+        icon={<FontAwesomeIcon icon={faTrash} size={"lg"} color={"#22596e"} />}
         clickHandler={() => ccStore.removePhrase(props.idx)}
       />
     </div>
